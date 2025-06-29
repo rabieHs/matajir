@@ -1,32 +1,35 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 /// Stripe Configuration
 ///
-/// IMPORTANT: Replace these with your actual Stripe sandbox keys
+/// IMPORTANT: Stripe keys are now loaded from environment variables (.env file)
 ///
 /// To get your Stripe keys:
 /// 1. Go to https://dashboard.stripe.com/
 /// 2. Make sure you're in "Test mode" (toggle in the top right)
 /// 3. Go to Developers > API keys
 /// 4. Copy your Publishable key and Secret key
+/// 5. Update the .env file with your actual keys
 ///
 /// For production:
 /// 1. Switch to "Live mode" in Stripe dashboard
 /// 2. Get your live keys
-/// 3. Update these values
-/// 4. Make sure to keep these keys secure!
+/// 3. Update the .env file with your live keys
+/// 4. Set STRIPE_IS_PRODUCTION=true in .env file
 
 class StripeConfig {
-  // Test/Sandbox Keys (replace with your actual test keys)
-  static const String testPublishableKey =
-      'pk_test_PLACEHOLDER_PUBLISHABLE_KEY';
-  static const String testSecretKey = 'sk_test_PLACEHOLDER_SECRET_KEY';
+  // Get keys from environment variables
+  static String get testPublishableKey =>
+      dotenv.env['STRIPE_TEST_PUBLISHABLE_KEY'] ?? '';
+  static String get testSecretKey => dotenv.env['STRIPE_TEST_SECRET_KEY'] ?? '';
 
-  // Live/Production Keys (replace with your actual live keys when ready)
-  static const String livePublishableKey =
-      'pk_live_YOUR_LIVE_PUBLISHABLE_KEY_HERE';
-  static const String liveSecretKey = 'sk_live_YOUR_LIVE_SECRET_KEY_HERE';
+  static String get livePublishableKey =>
+      dotenv.env['STRIPE_LIVE_PUBLISHABLE_KEY'] ?? '';
+  static String get liveSecretKey => dotenv.env['STRIPE_LIVE_SECRET_KEY'] ?? '';
 
-  // Environment setting
-  static const bool isProduction = false; // Set to true for production
+  // Environment setting from .env file
+  static bool get isProduction =>
+      dotenv.env['STRIPE_IS_PRODUCTION']?.toLowerCase() == 'true';
 
   // Get current keys based on environment
   static String get publishableKey =>
