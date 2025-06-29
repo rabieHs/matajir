@@ -1,0 +1,1806 @@
+{
+  "appName": "Matajir",
+  "@appName": {
+    "description": "The name of the application"
+  },
+  "categories": "Categories",
+  "@categories": {
+    "description": "Title for the categories section"
+  },
+  "search": "Search...",
+  "@search": {
+    "description": "Hint text for search field"
+  },
+  "searchStores": "Search stores...",
+  "@searchStores": {
+    "description": "Hint text for store search field"
+  },
+  "seeAll": "See All",
+  "@seeAll": {
+    "description": "Text for see all button"
+  },
+  "noCategory": "No category selected",
+  "@noCategory": {
+    "description": "Text shown when no category is selected"
+  },
+  "selectLanguage": "Select Language",
+  "@selectLanguage": {
+    "description": "Title for language selection dialog"
+  },
+  "selectCountry": "Select Country",
+  "@selectCountry": {
+    "description": "Title for country selection dialog"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language name"
+  },
+  "french": "French",
+  "@french": {
+    "description": "French language name"
+  },
+  "arabic": "Arabic",
+  "@arabic": {
+    "description": "Arabic language name"
+  },
+  "tunisia": "Tunisia",
+  "@tunisia": {
+    "description": "Tunisia country name"
+  },
+  "unitedStates": "United States",
+  "@unitedStates": {
+    "description": "United States country name"
+  },
+  "france": "France",
+  "@france": {
+    "description": "France country name"
+  },
+  "detectingLocation": "Detecting your location...",
+  "@detectingLocation": {
+    "description": "Message shown when detecting user location"
+  },
+  "locationPermissionDenied": "Location permission denied",
+  "@locationPermissionDenied": {
+    "description": "Message shown when location permission is denied"
+  },
+  "locationDisabled": "Location services are disabled",
+  "@locationDisabled": {
+    "description": "Message shown when location services are disabled"
+  },
+
+  "categoryClothing": "Clothing",
+  "@categoryClothing": {
+    "description": "Clothing category name"
+  },
+  "categoryFootwear": "Footwear",
+  "@categoryFootwear": {
+    "description": "Footwear category name"
+  },
+  "categoryAccessories": "Accessories",
+  "@categoryAccessories": {
+    "description": "Accessories category name"
+  },
+  "categoryBeauty": "Personal Care & Beauty",
+  "@categoryBeauty": {
+    "description": "Beauty category name"
+  },
+  "categoryElectronics": "Electronics & Technology",
+  "@categoryElectronics": {
+    "description": "Electronics category name"
+  },
+  "categoryMotherChild": "Mother & Child",
+  "@categoryMotherChild": {
+    "description": "Mother and child category name"
+  },
+  "categorySpecialNeeds": "Special Needs",
+  "@categorySpecialNeeds": {
+    "description": "Special needs category name"
+  },
+  "categoryHome": "Home & Kitchen",
+  "@categoryHome": {
+    "description": "Home category name"
+  },
+  "categorySports": "Sports & Fitness",
+  "@categorySports": {
+    "description": "Sports category name"
+  },
+  "categoryPets": "Pets",
+  "@categoryPets": {
+    "description": "Pets category name"
+  },
+  "categorySupermarket": "Supermarket",
+  "@categorySupermarket": {
+    "description": "Supermarket category name"
+  },
+  "categoryBooks": "Books & Hobbies",
+  "@categoryBooks": {
+    "description": "Books and hobbies category name"
+  },
+  "categoryServices": "Services",
+  "@categoryServices": {
+    "description": "Services category name"
+  },
+  "categoryIncense": "Incense & Arabic Perfumes",
+  "@categoryIncense": {
+    "description": "Incense and Arabic perfumes category name"
+  },
+  "categoryFlowers": "Flowers",
+  "@categoryFlowers": {
+    "description": "Flowers category name"
+  },
+  "categoryTools": "Tools & Supplies",
+  "@categoryTools": {
+    "description": "Tools and supplies category name"
+  },
+  "categoryDates": "Dates & Accessories",
+  "@categoryDates": {
+    "description": "Dates and accessories category name"
+  },
+  "categoryHijab": "Hijab Fashion",
+  "@categoryHijab": {
+    "description": "Hijab fashion category name"
+  },
+  "categoryTea": "Tea & Accessories",
+  "@categoryTea": {
+    "description": "Tea and accessories category name"
+  },
+  "categoryCoffee": "Coffee & Accessories",
+  "@categoryCoffee": {
+    "description": "Coffee and accessories category name"
+  },
+  "categoryMiscellaneous": "Miscellaneous Stores",
+  "@categoryMiscellaneous": {
+    "description": "Miscellaneous stores category name"
+  },
+
+  "subcategoryMen": "Men",
+  "@subcategoryMen": {
+    "description": "Men subcategory name"
+  },
+  "subcategoryWomen": "Women",
+  "@subcategoryWomen": {
+    "description": "Women subcategory name"
+  },
+  "subcategoryKids": "Children",
+  "@subcategoryKids": {
+    "description": "Children subcategory name"
+  },
+  "subcategorySpecialNeeds": "Special Needs",
+  "@subcategorySpecialNeeds": {
+    "description": "Special needs subcategory name"
+  },
+  "subcategoryOther": "Other",
+  "@subcategoryOther": {
+    "description": "Other subcategory name"
+  },
+  "subcategoryMedical": "Medical",
+  "@subcategoryMedical": {
+    "description": "Medical subcategory name"
+  },
+  "subcategoryWatches": "Watches",
+  "@subcategoryWatches": {
+    "description": "Watches subcategory name"
+  },
+  "subcategoryEyewear": "Eyewear",
+  "@subcategoryEyewear": {
+    "description": "Eyewear subcategory name"
+  },
+  "subcategoryBags": "Bags",
+  "@subcategoryBags": {
+    "description": "Bags subcategory name"
+  },
+  "subcategoryJewelry": "Jewelry",
+  "@subcategoryJewelry": {
+    "description": "Jewelry subcategory name"
+  },
+  "subcategoryHeadwear": "Headwear",
+  "@subcategoryHeadwear": {
+    "description": "Headwear subcategory name"
+  },
+  "subcategorySkincare": "Skincare",
+  "@subcategorySkincare": {
+    "description": "Skincare subcategory name"
+  },
+  "subcategoryHaircare": "Haircare",
+  "@subcategoryHaircare": {
+    "description": "Haircare subcategory name"
+  },
+  "subcategoryMakeup": "Makeup",
+  "@subcategoryMakeup": {
+    "description": "Makeup subcategory name"
+  },
+  "subcategoryPerfumes": "Perfumes",
+  "@subcategoryPerfumes": {
+    "description": "Perfumes subcategory name"
+  },
+  "subcategoryBathProducts": "Bath Products",
+  "@subcategoryBathProducts": {
+    "description": "Bath products subcategory name"
+  },
+  "subcategoryPhones": "Phones",
+  "@subcategoryPhones": {
+    "description": "Phones subcategory name"
+  },
+  "subcategoryLaptops": "Laptops",
+  "@subcategoryLaptops": {
+    "description": "Laptops subcategory name"
+  },
+  "subcategoryTablets": "Tablets",
+  "@subcategoryTablets": {
+    "description": "Tablets subcategory name"
+  },
+  "subcategoryTechAccessories": "Tech Accessories",
+  "@subcategoryTechAccessories": {
+    "description": "Tech accessories subcategory name"
+  },
+  "subcategoryGaming": "Gaming",
+  "@subcategoryGaming": {
+    "description": "Gaming subcategory name"
+  },
+  "subcategoryBabyEssentials": "Baby Essentials",
+  "@subcategoryBabyEssentials": {
+    "description": "Baby essentials subcategory name"
+  },
+  "subcategoryMaternity": "Maternity",
+  "@subcategoryMaternity": {
+    "description": "Maternity subcategory name"
+  },
+  "subcategoryStrollers": "Strollers",
+  "@subcategoryStrollers": {
+    "description": "Strollers subcategory name"
+  },
+  "subcategoryCarSeats": "Car Seats",
+  "@subcategoryCarSeats": {
+    "description": "Car seats subcategory name"
+  },
+  "subcategoryEducationalToys": "Educational Toys",
+  "@subcategoryEducationalToys": {
+    "description": "Educational toys subcategory name"
+  },
+  "subcategoryMedicalDevices": "Medical Devices",
+  "@subcategoryMedicalDevices": {
+    "description": "Medical devices subcategory name"
+  },
+  "subcategorySpecializedClothing": "Specialized Clothing",
+  "@subcategorySpecializedClothing": {
+    "description": "Specialized clothing subcategory name"
+  },
+  "subcategoryAssistiveTools": "Assistive Tools",
+  "@subcategoryAssistiveTools": {
+    "description": "Assistive tools subcategory name"
+  },
+  "subcategoryAssistiveTech": "Assistive Technology",
+  "@subcategoryAssistiveTech": {
+    "description": "Assistive technology subcategory name"
+  },
+  "subcategorySpecialActivities": "Special Activities & Games",
+  "@subcategorySpecialActivities": {
+    "description": "Special activities and games subcategory name"
+  },
+  "subcategoryFurniture": "Furniture",
+  "@subcategoryFurniture": {
+    "description": "Furniture subcategory name"
+  },
+  "subcategoryHomeAppliances": "Home Appliances",
+  "@subcategoryHomeAppliances": {
+    "description": "Home appliances subcategory name"
+  },
+  "subcategoryKitchenTools": "Kitchen Tools",
+  "@subcategoryKitchenTools": {
+    "description": "Kitchen tools subcategory name"
+  },
+  "subcategoryTextiles": "Textiles",
+  "@subcategoryTextiles": {
+    "description": "Textiles subcategory name"
+  },
+  "subcategoryDecor": "Decor",
+  "@subcategoryDecor": {
+    "description": "Decor subcategory name"
+  },
+  "subcategorySportswear": "Sportswear",
+  "@subcategorySportswear": {
+    "description": "Sportswear subcategory name"
+  },
+  "subcategorySportsEquipment": "Sports Equipment",
+  "@subcategorySportsEquipment": {
+    "description": "Sports equipment subcategory name"
+  },
+  "subcategoryFitnessDevices": "Fitness Devices",
+  "@subcategoryFitnessDevices": {
+    "description": "Fitness devices subcategory name"
+  },
+  "subcategorySupplements": "Supplements",
+  "@subcategorySupplements": {
+    "description": "Supplements subcategory name"
+  },
+  "subcategoryPetFood": "Pet Food",
+  "@subcategoryPetFood": {
+    "description": "Pet food subcategory name"
+  },
+  "subcategoryPetToys": "Pet Toys",
+  "@subcategoryPetToys": {
+    "description": "Pet toys subcategory name"
+  },
+  "subcategoryPetGrooming": "Pet Grooming",
+  "@subcategoryPetGrooming": {
+    "description": "Pet grooming subcategory name"
+  },
+  "subcategoryPetCages": "Pet Cages",
+  "@subcategoryPetCages": {
+    "description": "Pet cages subcategory name"
+  },
+  "subcategoryFreshProducts": "Fresh Products",
+  "@subcategoryFreshProducts": {
+    "description": "Fresh products subcategory name"
+  },
+  "subcategoryCannedGoods": "Canned Goods",
+  "@subcategoryCannedGoods": {
+    "description": "Canned goods subcategory name"
+  },
+  "subcategoryBeverages": "Beverages",
+  "@subcategoryBeverages": {
+    "description": "Beverages subcategory name"
+  },
+  "subcategoryCleaningProducts": "Cleaning Products",
+  "@subcategoryCleaningProducts": {
+    "description": "Cleaning products subcategory name"
+  },
+  "subcategoryOrganicProducts": "Organic Products",
+  "@subcategoryOrganicProducts": {
+    "description": "Organic products subcategory name"
+  },
+  "subcategoryBooks": "Books",
+  "@subcategoryBooks": {
+    "description": "Books subcategory name"
+  },
+  "subcategoryArtSupplies": "Art Supplies",
+  "@subcategoryArtSupplies": {
+    "description": "Art supplies subcategory name"
+  },
+  "subcategoryMusicalInstruments": "Musical Instruments",
+  "@subcategoryMusicalInstruments": {
+    "description": "Musical instruments subcategory name"
+  },
+  "subcategoryBrainGames": "Brain Games",
+  "@subcategoryBrainGames": {
+    "description": "Brain games subcategory name"
+  },
+  "subcategoryGiftCards": "Gift Cards",
+  "@subcategoryGiftCards": {
+    "description": "Gift cards subcategory name"
+  },
+  "subcategorySubscriptions": "Subscriptions",
+  "@subcategorySubscriptions": {
+    "description": "Subscriptions subcategory name"
+  },
+  "subcategoryRepair": "Repair & Maintenance",
+  "@subcategoryRepair": {
+    "description": "Repair and maintenance subcategory name"
+  },
+  "subcategoryConsultations": "Consultations",
+  "@subcategoryConsultations": {
+    "description": "Consultations subcategory name"
+  },
+  "subcategoryIncense": "Incense",
+  "@subcategoryIncense": {
+    "description": "Incense subcategory name"
+  },
+  "subcategoryOudOil": "Oud Oil",
+  "@subcategoryOudOil": {
+    "description": "Oud oil subcategory name"
+  },
+  "subcategoryMamool": "Mamool",
+  "@subcategoryMamool": {
+    "description": "Mamool subcategory name"
+  },
+  "subcategoryOrientalPerfumes": "Oriental Perfumes",
+  "@subcategoryOrientalPerfumes": {
+    "description": "Oriental perfumes subcategory name"
+  },
+  "subcategoryNaturalFlowers": "Natural Flowers",
+  "@subcategoryNaturalFlowers": {
+    "description": "Natural flowers subcategory name"
+  },
+  "subcategoryArtificialFlowers": "Artificial Flowers",
+  "@subcategoryArtificialFlowers": {
+    "description": "Artificial flowers subcategory name"
+  },
+  "subcategoryArrangements": "Arrangements",
+  "@subcategoryArrangements": {
+    "description": "Arrangements subcategory name"
+  },
+  "subcategoryArrangementSupplies": "Arrangement Supplies",
+  "@subcategoryArrangementSupplies": {
+    "description": "Arrangement supplies subcategory name"
+  },
+  "subcategoryHandTools": "Hand Tools",
+  "@subcategoryHandTools": {
+    "description": "Hand tools subcategory name"
+  },
+  "subcategoryPowerTools": "Power Tools",
+  "@subcategoryPowerTools": {
+    "description": "Power tools subcategory name"
+  },
+  "subcategoryMaintenanceSupplies": "Maintenance Supplies",
+  "@subcategoryMaintenanceSupplies": {
+    "description": "Maintenance supplies subcategory name"
+  },
+  "subcategorySafetyEquipment": "Safety Equipment",
+  "@subcategorySafetyEquipment": {
+    "description": "Safety equipment subcategory name"
+  },
+  "subcategoryDateVarieties": "Date Varieties",
+  "@subcategoryDateVarieties": {
+    "description": "Date varieties subcategory name"
+  },
+  "subcategoryDateProducts": "Date Products",
+  "@subcategoryDateProducts": {
+    "description": "Date products subcategory name"
+  },
+  "subcategoryDatePackaging": "Date Packaging",
+  "@subcategoryDatePackaging": {
+    "description": "Date packaging subcategory name"
+  },
+  "subcategoryDateGifts": "Date Gifts",
+  "@subcategoryDateGifts": {
+    "description": "Date gifts subcategory name"
+  },
+  "subcategoryHijabClothing": "Hijab Clothing",
+  "@subcategoryHijabClothing": {
+    "description": "Hijab clothing subcategory name"
+  },
+  "subcategoryHeadscarves": "Headscarves",
+  "@subcategoryHeadscarves": {
+    "description": "Headscarves subcategory name"
+  },
+  "subcategoryHijabAccessories": "Hijab Accessories",
+  "@subcategoryHijabAccessories": {
+    "description": "Hijab accessories subcategory name"
+  },
+  "subcategorySportsHijab": "Sports Hijab",
+  "@subcategorySportsHijab": {
+    "description": "Sports hijab subcategory name"
+  },
+  "subcategoryHerbalTea": "Herbal Tea",
+  "@subcategoryHerbalTea": {
+    "description": "Herbal tea subcategory name"
+  },
+  "subcategoryTraditionalTea": "Traditional Tea",
+  "@subcategoryTraditionalTea": {
+    "description": "Traditional tea subcategory name"
+  },
+  "subcategoryPremiumTea": "Premium Tea",
+  "@subcategoryPremiumTea": {
+    "description": "Premium tea subcategory name"
+  },
+  "subcategoryTeaPreparation": "Tea Preparation",
+  "@subcategoryTeaPreparation": {
+    "description": "Tea preparation subcategory name"
+  },
+  "subcategoryArabicCoffee": "Arabic Coffee",
+  "@subcategoryArabicCoffee": {
+    "description": "Arabic coffee subcategory name"
+  },
+  "subcategoryEspresso": "Espresso",
+  "@subcategoryEspresso": {
+    "description": "Espresso subcategory name"
+  },
+  "subcategoryFrenchPress": "French Press",
+  "@subcategoryFrenchPress": {
+    "description": "French press subcategory name"
+  },
+  "subcategoryCoffeePreparation": "Coffee Preparation",
+  "@subcategoryCoffeePreparation": {
+    "description": "Coffee preparation subcategory name"
+  },
+
+  "storesNearby": "Stores Nearby",
+  "@storesNearby": {
+    "description": "Stores nearby text"
+  },
+
+  "payment": "Payment",
+  "@payment": {
+    "description": "Payment screen title"
+  },
+  "paymentSummary": "Payment Summary",
+  "@paymentSummary": {
+    "description": "Payment summary section title"
+  },
+  "package": "Package",
+  "@package": {
+    "description": "Package label in payment summary"
+  },
+  "duration": "Duration",
+  "@duration": {
+    "description": "Duration label in payment summary"
+  },
+  "price": "Price",
+  "@price": {
+    "description": "Price label in payment summary"
+  },
+  "payNow": "Pay Now",
+  "@payNow": {
+    "description": "Pay now button text"
+  },
+  "paymentSuccessful": "Payment successful",
+  "@paymentSuccessful": {
+    "description": "Payment successful message"
+  },
+  "paymentProcessingFailed": "Payment processing failed",
+  "@paymentProcessingFailed": {
+    "description": "Payment processing failed message"
+  },
+  "paymentConfirmationFailed": "Payment confirmation failed",
+  "@paymentConfirmationFailed": {
+    "description": "Payment confirmation failed message"
+  },
+  "weeks": "weeks",
+  "@weeks": {
+    "description": "Weeks text for duration"
+  },
+  "days": "days",
+  "@days": {
+    "description": "Days text for duration"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home menu item"
+  },
+  "favorites": "Favorites",
+  "@favorites": {
+    "description": "Favorites menu item"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings menu item"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout menu item"
+  },
+  "viewProfile": "View Profile",
+  "@viewProfile": {
+    "description": "View profile button text"
+  },
+  "promotedStores": "Promoted Stores",
+  "@promotedStores": {
+    "description": "Promoted stores text"
+  },
+  "allStores": "All Stores",
+  "@allStores": {
+    "description": "All stores text"
+  },
+  "changeLocation": "Change Location",
+  "@changeLocation": {
+    "description": "Change location button text"
+  },
+
+  "login": "Login",
+  "@login": {
+    "description": "Login button text"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Register button text"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {
+    "description": "Forgot password button text"
+  },
+  "dontHaveAccount": "Don't have an account?",
+  "@dontHaveAccount": {
+    "description": "Text for users who don't have an account"
+  },
+  "alreadyHaveAccount": "Already have an account?",
+  "@alreadyHaveAccount": {
+    "description": "Text for users who already have an account"
+  },
+  "resetPassword": "Reset Password",
+  "@resetPassword": {
+    "description": "Reset password button text"
+  },
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  "phoneNumber": "Phone Number",
+  "@phoneNumber": {
+    "description": "Phone number field label"
+  },
+  "selectUserType": "Select User Type",
+  "@selectUserType": {
+    "description": "User type selection title"
+  },
+  "client": "Client",
+  "@client": {
+    "description": "Client user type"
+  },
+  "provider": "Provider",
+  "@provider": {
+    "description": "Provider user type"
+  },
+  "clientDescription": "Shop and browse stores",
+  "@clientDescription": {
+    "description": "Description for client user type"
+  },
+  "providerDescription": "Manage your store and products",
+  "@providerDescription": {
+    "description": "Description for provider user type"
+  },
+  "continueButton": "Continue",
+  "@continueButton": {
+    "description": "Continue button text"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile title"
+  },
+  "editProfile": "Edit Profile",
+  "@editProfile": {
+    "description": "Edit profile button text"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "errorOccurred": "An error occurred",
+  "@errorOccurred": {
+    "description": "Generic error message"
+  },
+  "invalidEmail": "Please enter a valid email",
+  "@invalidEmail": {
+    "description": "Invalid email error message"
+  },
+  "passwordTooShort": "Password must be at least 6 characters",
+  "@passwordTooShort": {
+    "description": "Password too short error message"
+  },
+  "passwordsDontMatch": "Passwords don't match",
+  "@passwordsDontMatch": {
+    "description": "Passwords don't match error message"
+  },
+  "requiredField": "This field is required",
+  "@requiredField": {
+    "description": "Required field error message"
+  },
+  "loginSuccess": "Login successful",
+  "@loginSuccess": {
+    "description": "Login success message"
+  },
+  "registerSuccess": "Registration successful",
+  "@registerSuccess": {
+    "description": "Registration success message"
+  },
+  "logoutSuccess": "Logout successful",
+  "@logoutSuccess": {
+    "description": "Logout success message"
+  },
+  "resetPasswordSuccess": "Password reset email sent",
+  "@resetPasswordSuccess": {
+    "description": "Password reset success message"
+  },
+  "myStores": "My Stores",
+  "@myStores": {
+    "description": "My stores title for providers"
+  },
+  "myAds": "My Ads",
+  "@myAds": {
+    "description": "My ads title for providers"
+  },
+  "addStore": "Add Store",
+  "@addStore": {
+    "description": "Add store button text"
+  },
+  "storeDetails": "Store Details",
+  "@storeDetails": {
+    "description": "Store details title"
+  },
+  "dashboard": "Dashboard",
+  "@dashboard": {
+    "description": "Dashboard title for providers"
+  },
+  "orders": "Orders",
+  "@orders": {
+    "description": "Orders title"
+  },
+  "products": "Products",
+  "@products": {
+    "description": "Products title"
+  },
+  "analytics": "Analytics",
+  "@analytics": {
+    "description": "Analytics title"
+  },
+  "stores": "Stores",
+  "@stores": {
+    "description": "Stores title"
+  },
+  "advertiseWithUs": "Advertise with us",
+  "@advertiseWithUs": {
+    "description": "Advertise with us menu item"
+  },
+  "or": "OR",
+  "@or": {
+    "description": "Or text for dividers"
+  },
+  "continueWithGoogle": "Continue with Google",
+  "@continueWithGoogle": {
+    "description": "Google sign-in button text"
+  },
+  "completeYourProfile": "Complete Your Profile",
+  "@completeYourProfile": {
+    "description": "Complete profile screen title"
+  },
+  "completeProfileDescription": "Please provide the following information to complete your profile",
+  "@completeProfileDescription": {
+    "description": "Complete profile screen description"
+  },
+  "storeOwner": "Store Owner",
+  "@storeOwner": {
+    "description": "Store owner switch label"
+  },
+  "saveAndContinue": "Save and Continue",
+  "@saveAndContinue": {
+    "description": "Save and continue button text"
+  },
+  "pleaseEnterYourName": "Please enter your name",
+  "@pleaseEnterYourName": {
+    "description": "Name validation error message"
+  },
+  "pleaseEnterYourPhoneNumber": "Please enter your phone number",
+  "@pleaseEnterYourPhoneNumber": {
+    "description": "Phone number validation error message"
+  },
+  "loginToViewFavorites": "Login to View Favorites",
+  "@loginToViewFavorites": {
+    "description": "Message shown when user needs to login to view favorites"
+  },
+  "loginToSaveStores": "Login to save your favorite stores and access them anytime",
+  "@loginToSaveStores": {
+    "description": "Description for login to save stores"
+  },
+  "noFavorites": "No Favorites Yet",
+  "@noFavorites": {
+    "description": "Message shown when user has no favorites"
+  },
+  "addFavoritesDescription": "Start adding stores to your favorites to see them here",
+  "@addFavoritesDescription": {
+    "description": "Description for adding favorites"
+  },
+  "exploreStores": "Explore Stores",
+  "@exploreStores": {
+    "description": "Button text to explore stores"
+  },
+  "account": "Account",
+  "@account": {
+    "description": "Account section title in settings"
+  },
+  "security": "Security",
+  "@security": {
+    "description": "Security settings option"
+  },
+  "storeSettings": "Store Settings",
+  "@storeSettings": {
+    "description": "Store settings option for store owners"
+  },
+  "appSettings": "App Settings",
+  "@appSettings": {
+    "description": "App settings section title"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language settings option"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications settings option"
+  },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark mode settings option"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About section title in settings"
+  },
+  "aboutUs": "About Us",
+  "@aboutUs": {
+    "description": "About us option"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy option"
+  },
+  "termsOfService": "Terms of Service",
+  "@termsOfService": {
+    "description": "Terms of service option"
+  },
+  "help": "Help",
+  "@help": {
+    "description": "Help option"
+  },
+  "benefits": "Benefits",
+  "@benefits": {
+    "description": "Benefits section title in advertise screen"
+  },
+  "pricingPlans": "Pricing Plans",
+  "@pricingPlans": {
+    "description": "Pricing plans section title in advertise screen"
+  },
+  "pleaseLoginToAdvertise": "Please log in to advertise with us",
+  "@pleaseLoginToAdvertise": {
+    "description": "Message shown when user needs to login to advertise"
+  },
+  "loginRequiredForAds": "You need to be logged in to create and manage advertisements",
+  "@loginRequiredForAds": {
+    "description": "Description for login required for advertisements"
+  },
+  "advertiseYourBusiness": "Advertise your business on Matajir",
+  "@advertiseYourBusiness": {
+    "description": "Title for advertise screen"
+  },
+  "reachPotentialCustomers": "Reach thousands of potential customers by advertising on our platform",
+  "@reachPotentialCustomers": {
+    "description": "Description for advertising benefits"
+  },
+  "chooseAdvertisingPackage": "Choose an advertising package",
+  "@chooseAdvertisingPackage": {
+    "description": "Title for advertising packages section"
+  },
+
+  "noStoresYet": "No Stores Yet",
+  "@noStoresYet": {
+    "description": "Message shown when user has no stores"
+  },
+  "createYourFirstStore": "Create your first store to start selling your products",
+  "@createYourFirstStore": {
+    "description": "Description for creating first store"
+  },
+  "addNewStore": "Add New Store",
+  "@addNewStore": {
+    "description": "Add new store button text"
+  },
+  "createStoreDescription": "Create a new store to showcase your products",
+  "@createStoreDescription": {
+    "description": "Description for creating a new store"
+  },
+  "editStore": "Edit Store",
+  "@editStore": {
+    "description": "Edit store title"
+  },
+  "view": "View",
+  "@view": {
+    "description": "View button text"
+  },
+  "viewDetails": "View Details",
+  "@viewDetails": {
+    "description": "View details button text"
+  },
+  "deleteStore": "Delete Store",
+  "@deleteStore": {
+    "description": "Delete store button text"
+  },
+  "deleteStoreConfirmation": "Are you sure you want to delete {storeName}?",
+  "@deleteStoreConfirmation": {
+    "description": "Delete store confirmation message",
+    "placeholders": {
+      "storeName": {
+        "type": "String",
+        "example": "My Store"
+      }
+    }
+  },
+  "storeDeleted": "{storeName} has been deleted",
+  "@storeDeleted": {
+    "description": "Store deleted success message",
+    "placeholders": {
+      "storeName": {
+        "type": "String",
+        "example": "My Store"
+      }
+    }
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button text"
+  },
+  "storeName": "Store Name",
+  "@storeName": {
+    "description": "Store name field label"
+  },
+  "storeNameRequired": "Store name is required",
+  "@storeNameRequired": {
+    "description": "Store name required error message"
+  },
+  "storeSecondName": "Store Second Name (Optional)",
+  "@storeSecondName": {
+    "description": "Store second name field label"
+  },
+  "storeDescription": "Store Description",
+  "@storeDescription": {
+    "description": "Store description field label"
+  },
+  "storeLogo": "Store Logo",
+  "@storeLogo": {
+    "description": "Store logo section title"
+  },
+  "tapToUpload": "Tap to upload",
+  "@tapToUpload": {
+    "description": "Tap to upload text"
+  },
+  "basicInformation": "Basic Information",
+  "@basicInformation": {
+    "description": "Basic information section title"
+  },
+  "contactInformation": "Contact Information",
+  "@contactInformation": {
+    "description": "Contact information section title"
+  },
+  "location": "Location",
+  "@location": {
+    "description": "Location section title"
+  },
+  "useCurrentLocation": "Use Current Location",
+  "@useCurrentLocation": {
+    "description": "Use current location switch label"
+  },
+  "country": "Country",
+  "@country": {
+    "description": "Country field label"
+  },
+  "detectingLocation": "Detecting location...",
+  "@detectingLocation": {
+    "description": "Detecting location message"
+  },
+  "selectStoreToPromote": "Select Store to Promote",
+  "@selectStoreToPromote": {
+    "description": "Select store to promote label"
+  },
+  "pleaseSelectStore": "Please select a store to promote",
+  "@pleaseSelectStore": {
+    "description": "Please select store validation message"
+  },
+  "noStoresFound": "No stores found",
+  "@noStoresFound": {
+    "description": "No stores found message"
+  },
+  "createStoreFirst": "You need to create a store first before you can promote it",
+  "@createStoreFirst": {
+    "description": "Create store first message"
+  },
+  "selectStore": "Select Store",
+  "@selectStore": {
+    "description": "Select store dropdown hint"
+  },
+  "storeSelection": "Store Selection",
+  "@storeSelection": {
+    "description": "Store selection section header"
+  },
+  "city": "City",
+  "@city": {
+    "description": "City field label"
+  },
+  "address": "Address",
+  "@address": {
+    "description": "Address field label"
+  },
+  "storeBanners": "Store Banners",
+  "@storeBanners": {
+    "description": "Store banners section title"
+  },
+  "storeBannersDescription": "Add up to 4 banner images for your store (recommended size: 1200x400)",
+  "@storeBannersDescription": {
+    "description": "Store banners description"
+  },
+  "addBanner": "Add Banner",
+  "@addBanner": {
+    "description": "Add banner button text"
+  },
+  "banners": "Banners",
+  "@banners": {
+    "description": "Banners text"
+  },
+  "socialLinks": "Social Links",
+  "@socialLinks": {
+    "description": "Social links section title"
+  },
+  "socialLinksDescription": "Add your social media links to connect with customers",
+  "@socialLinksDescription": {
+    "description": "Social links description"
+  },
+  "platform": "Platform",
+  "@platform": {
+    "description": "Platform field label"
+  },
+  "url": "URL",
+  "@url": {
+    "description": "URL field label"
+  },
+  "addSocialLink": "Add Social Link",
+  "@addSocialLink": {
+    "description": "Add social link button text"
+  },
+  "createStore": "Create Store",
+  "@createStore": {
+    "description": "Create store button text"
+  },
+  "updateStore": "Update Store",
+  "@updateStore": {
+    "description": "Update store button text"
+  },
+  "storeCreated": "Store created successfully",
+  "@storeCreated": {
+    "description": "Store created success message"
+  },
+  "storeUpdated": "Store updated successfully",
+  "@storeUpdated": {
+    "description": "Store updated success message"
+  },
+  "storeCreationFailed": "Failed to create store",
+  "@storeCreationFailed": {
+    "description": "Store creation failed message"
+  },
+  "storeUpdateFailed": "Failed to update store",
+  "@storeUpdateFailed": {
+    "description": "Store update failed message"
+  },
+  "website": "Website",
+  "@website": {
+    "description": "Website field label"
+  },
+  "invalidWebsite": "Please enter a valid website URL",
+  "@invalidWebsite": {
+    "description": "Invalid website error message"
+  },
+  "invalidUrl": "Please enter a valid URL",
+  "@invalidUrl": {
+    "description": "Invalid URL error message"
+  },
+  "optional": "Optional",
+  "@optional": {
+    "description": "Optional field indicator"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Description field label"
+  },
+  "verified": "Verified",
+  "@verified": {
+    "description": "Verified status text"
+  },
+  "pending": "Pending",
+  "@pending": {
+    "description": "Pending status text"
+  },
+  "noBanners": "No banners available",
+  "@noBanners": {
+    "description": "No banners message"
+  },
+  "storeInformation": "Store Information",
+  "@storeInformation": {
+    "description": "Store information section title"
+  },
+  "createdAt": "Created At",
+  "@createdAt": {
+    "description": "Created at label"
+  },
+  "publishedAt": "Published At",
+  "@publishedAt": {
+    "description": "Published at label"
+  },
+  "lastUpdated": "Last Updated",
+  "@lastUpdated": {
+    "description": "Last updated label"
+  },
+  "instagram": "Instagram",
+  "@instagram": {
+    "description": "Instagram platform name"
+  },
+  "facebook": "Facebook",
+  "@facebook": {
+    "description": "Facebook platform name"
+  },
+  "twitter": "Twitter",
+  "@twitter": {
+    "description": "Twitter platform name"
+  },
+  "youtube": "YouTube",
+  "@youtube": {
+    "description": "YouTube platform name"
+  },
+  "tiktok": "TikTok",
+  "@tiktok": {
+    "description": "TikTok platform name"
+  },
+  "locationPermissionDenied": "Location permission denied",
+  "@locationPermissionDenied": {
+    "description": "Location permission denied message"
+  },
+  "locationPermissionPermanentlyDenied": "Location permission permanently denied",
+  "@locationPermissionPermanentlyDenied": {
+    "description": "Location permission permanently denied message"
+  },
+  "openSettings": "Open Settings",
+  "@openSettings": {
+    "description": "Open settings button text"
+  },
+  "locationError": "Error getting location",
+  "@locationError": {
+    "description": "Location error message"
+  },
+  "logoUploaded": "Logo uploaded successfully",
+  "@logoUploaded": {
+    "description": "Logo uploaded success message"
+  },
+  "bannerAdded": "Banner added successfully",
+  "@bannerAdded": {
+    "description": "Banner added success message"
+  },
+  "loginRequired": "Login required",
+  "@loginRequired": {
+    "description": "Login required message"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error label"
+  },
+  "algeria": "Algeria",
+  "@algeria": {
+    "description": "Algeria country name"
+  },
+  "morocco": "Morocco",
+  "@morocco": {
+    "description": "Morocco country name"
+  },
+  "libya": "Libya",
+  "@libya": {
+    "description": "Libya country name"
+  },
+  "egypt": "Egypt",
+  "@egypt": {
+    "description": "Egypt country name"
+  },
+
+  "homeSpotlight": "Home Spotlight",
+  "@homeSpotlight": {
+    "description": "Home Spotlight package name"
+  },
+  "homeSpotlightPrice": "$50 / week",
+  "@homeSpotlightPrice": {
+    "description": "Home Spotlight package price"
+  },
+  "homeSpotlightDescription": "Show your ad on the app's homepage for maximum visibility.",
+  "@homeSpotlightDescription": {
+    "description": "Home Spotlight package description"
+  },
+  "homeSpotlightAdvertisement": "Home Spotlight Advertisement",
+  "@homeSpotlightAdvertisement": {
+    "description": "Home Spotlight advertisement screen title"
+  },
+  "homeSpotlightDetails": "Home Spotlight Details",
+  "@homeSpotlightDetails": {
+    "description": "Home Spotlight details section title"
+  },
+
+  "categoryMatch": "Category Match",
+  "@categoryMatch": {
+    "description": "Category Match package name"
+  },
+  "categoryMatchPrice": "$30 / week",
+  "@categoryMatchPrice": {
+    "description": "Category Match package price"
+  },
+  "categoryMatchDescription": "Display your ad in a selected category, reaching users actively browsing that section.",
+  "@categoryMatchDescription": {
+    "description": "Category Match package description"
+  },
+  "categoryMatchAdvertisement": "Category Match Advertisement",
+  "@categoryMatchAdvertisement": {
+    "description": "Category Match advertisement screen title"
+  },
+  "categorySelection": "Category Selection",
+  "@categorySelection": {
+    "description": "Category Selection section title"
+  },
+  "selectCategory": "Select Category",
+  "@selectCategory": {
+    "description": "Select Category label"
+  },
+  "selectSubcategory": "Select Subcategory",
+  "@selectSubcategory": {
+    "description": "Select Subcategory label"
+  },
+  "selectCategoryFirst": "Select a category first",
+  "@selectCategoryFirst": {
+    "description": "Select category first message"
+  },
+  "pleaseSelectCategory": "Please select a category",
+  "@pleaseSelectCategory": {
+    "description": "Please select a category error message"
+  },
+
+  "topStoreBoost": "Top Store Boost",
+  "@topStoreBoost": {
+    "description": "Top Store Boost package name"
+  },
+  "topStoreBoostPrice": "$40 / week",
+  "@topStoreBoostPrice": {
+    "description": "Top Store Boost package price"
+  },
+  "topStoreBoostDescription": "Promote your store at the top of search results and in the promoted stores list.",
+  "@topStoreBoostDescription": {
+    "description": "Top Store Boost package description"
+  },
+  "topStoreBoostAdvertisement": "Top Store Boost Advertisement",
+  "@topStoreBoostAdvertisement": {
+    "description": "Top Store Boost advertisement screen title"
+  },
+  "storeSelection": "Store Selection",
+  "@storeSelection": {
+    "description": "Store Selection section title"
+  },
+  "selectStoreToPromote": "Select Store to Promote",
+  "@selectStoreToPromote": {
+    "description": "Select Store to Promote label"
+  },
+  "selectStore": "Select Store",
+  "@selectStore": {
+    "description": "Select Store label"
+  },
+  "noStoresFound": "No stores found",
+  "@noStoresFound": {
+    "description": "No stores found message"
+  },
+  "createStoreFirst": "Create a store first to promote it",
+  "@createStoreFirst": {
+    "description": "Create store first message"
+  },
+  "storeLogoUsed": "Your store logo will be used as the advertisement image",
+  "@storeLogoUsed": {
+    "description": "Store logo used message"
+  },
+  "pleaseSelectStore": "Please select a store to promote",
+  "@pleaseSelectStore": {
+    "description": "Please select a store error message"
+  },
+
+  "advertisementImage": "Advertisement Image",
+  "@advertisementImage": {
+    "description": "Advertisement Image section title"
+  },
+  "recommendedImageSize": "Recommended image size: {size}",
+  "@recommendedImageSize": {
+    "description": "Recommended image size message",
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "1200 x 400 pixels"
+      }
+    }
+  },
+  "tapToUploadImage": "Tap to upload",
+  "@tapToUploadImage": {
+    "description": "Tap to upload image text"
+  },
+  "changeImage": "Change image",
+  "@changeImage": {
+    "description": "Change image button text"
+  },
+  "advertisementDetails": "Advertisement Details",
+  "@advertisementDetails": {
+    "description": "Advertisement Details section title"
+  },
+  "advertisementName": "Advertisement Name",
+  "@advertisementName": {
+    "description": "Advertisement Name field label"
+  },
+  "enterAdvertisementName": "Enter a name for your advertisement",
+  "@enterAdvertisementName": {
+    "description": "Enter advertisement name hint"
+  },
+  "clickUrl": "Click URL",
+  "@clickUrl": {
+    "description": "Click URL field label"
+  },
+  "enterClickUrl": "Enter the URL where users will be directed when they click your ad",
+  "@enterClickUrl": {
+    "description": "Enter click URL hint"
+  },
+  "duration": "Duration",
+  "@duration": {
+    "description": "Duration field label"
+  },
+  "week": "Week",
+  "@week": {
+    "description": "Week duration unit"
+  },
+  "day": "Day",
+  "@day": {
+    "description": "Day duration unit"
+  },
+  "createAdvertisement": "Create Advertisement",
+  "@createAdvertisement": {
+    "description": "Create Advertisement button text"
+  },
+  "advertisementCreatedSuccess": "Advertisement created successfully!",
+  "@advertisementCreatedSuccess": {
+    "description": "Advertisement created success message"
+  },
+  "storePromotionCreatedSuccess": "Store promotion created successfully!",
+  "@storePromotionCreatedSuccess": {
+    "description": "Store promotion created success message"
+  },
+  "failedToCreateAdvertisement": "Failed to create advertisement",
+  "@failedToCreateAdvertisement": {
+    "description": "Failed to create advertisement message"
+  },
+  "failedToCreateStorePromotion": "Failed to create store promotion",
+  "@failedToCreateStorePromotion": {
+    "description": "Failed to create store promotion message"
+  },
+  "thisFieldRequired": "This field is required",
+  "@thisFieldRequired": {
+    "description": "This field is required error message"
+  },
+  "create": "Create",
+  "@create": {
+    "description": "Create button text"
+  },
+  "pleaseSelectImage": "Please select an image",
+  "@pleaseSelectImage": {
+    "description": "Please select an image error message"
+  },
+  "failedToUploadImage": "Failed to upload image",
+  "@failedToUploadImage": {
+    "description": "Failed to upload image error message"
+  },
+
+  "features": "Features",
+  "@features": {
+    "description": "Features section title in package details"
+  },
+  "subscribeNow": "Subscribe Now",
+  "@subscribeNow": {
+    "description": "Subscribe now button text"
+  },
+  "adExample": "Ad Example",
+  "@adExample": {
+    "description": "Ad example section title"
+  },
+  "howAdWillAppear": "How your ad will appear on the home screen",
+  "@howAdWillAppear": {
+    "description": "Description of ad appearance"
+  },
+  "featuredAd": "Featured Ad",
+  "@featuredAd": {
+    "description": "Featured ad label"
+  },
+  "bestFor": "Best For",
+  "@bestFor": {
+    "description": "Best for section title"
+  },
+  "newStoreLaunch": "New Store Launch",
+  "@newStoreLaunch": {
+    "description": "New store launch use case"
+  },
+  "newStoreLaunchDesc": "Perfect for announcing your new store to all users",
+  "@newStoreLaunchDesc": {
+    "description": "New store launch description"
+  },
+  "specialPromotions": "Special Promotions",
+  "@specialPromotions": {
+    "description": "Special promotions use case"
+  },
+  "specialPromotionsDesc": "Ideal for limited-time offers and seasonal sales",
+  "@specialPromotionsDesc": {
+    "description": "Special promotions description"
+  },
+  "brandAwareness": "Brand Awareness",
+  "@brandAwareness": {
+    "description": "Brand awareness use case"
+  },
+  "brandAwarenessDesc": "Great for increasing visibility and recognition",
+  "@brandAwarenessDesc": {
+    "description": "Brand awareness description"
+  },
+  "ecommerceBusiness": "E-commerce Businesses",
+  "@ecommerceBusiness": {
+    "description": "E-commerce businesses use case"
+  },
+  "ecommerceBusinessDesc": "Ideal for stores with a wide range of products",
+  "@ecommerceBusinessDesc": {
+    "description": "E-commerce businesses description"
+  },
+  "premiumBrands": "Premium Brands",
+  "@premiumBrands": {
+    "description": "Premium brands use case"
+  },
+  "premiumBrandsDesc": "Great for luxury and premium brands seeking quality exposure",
+  "@premiumBrandsDesc": {
+    "description": "Premium brands description"
+  },
+  "newProductLaunch": "New Product Launch",
+  "@newProductLaunch": {
+    "description": "New product launch use case"
+  },
+  "newProductLaunchDesc": "Ideal for introducing new products to interested customers",
+  "@newProductLaunchDesc": {
+    "description": "New product launch description"
+  },
+  "categoryLeaders": "Category Leaders",
+  "@categoryLeaders": {
+    "description": "Category leaders use case"
+  },
+  "categoryLeadersDesc": "Great for establishing your brand as a category leader",
+  "@categoryLeadersDesc": {
+    "description": "Category leaders description"
+  },
+  "performanceMetrics": "Performance Metrics",
+  "@performanceMetrics": {
+    "description": "Performance metrics section title"
+  },
+  "nicheProducts": "Niche Products",
+  "@nicheProducts": {
+    "description": "Niche products use case"
+  },
+  "nicheProductsDesc": "Perfect for specialized products with a specific audience",
+  "@nicheProductsDesc": {
+    "description": "Niche products description"
+  },
+  "establishedStores": "Established Stores",
+  "@establishedStores": {
+    "description": "Established stores use case"
+  },
+  "establishedStoresDesc": "Perfect for stores looking to maintain market leadership",
+  "@establishedStoresDesc": {
+    "description": "Established stores description"
+  },
+
+  "homeSpotlightFeature1": "Featured placement on the home screen",
+  "@homeSpotlightFeature1": {
+    "description": "Home Spotlight feature 1"
+  },
+  "homeSpotlightFeature2": "Visible to all app users",
+  "@homeSpotlightFeature2": {
+    "description": "Home Spotlight feature 2"
+  },
+  "homeSpotlightFeature3": "High-quality image display",
+  "@homeSpotlightFeature3": {
+    "description": "Home Spotlight feature 3"
+  },
+  "homeSpotlightFeature4": "Direct link to your store or website",
+  "@homeSpotlightFeature4": {
+    "description": "Home Spotlight feature 4"
+  },
+  "homeSpotlightFeature5": "Weekly performance analytics",
+  "@homeSpotlightFeature5": {
+    "description": "Home Spotlight feature 5"
+  },
+  "homeSpotlightFeature6": "Priority customer support",
+  "@homeSpotlightFeature6": {
+    "description": "Home Spotlight feature 6"
+  },
+
+  "categoryMatchFeature1": "Targeted placement in a category of your choice",
+  "@categoryMatchFeature1": {
+    "description": "Category Match feature 1"
+  },
+  "categoryMatchFeature2": "Reach users with specific interests",
+  "@categoryMatchFeature2": {
+    "description": "Category Match feature 2"
+  },
+  "categoryMatchFeature3": "Appear in category browsing results",
+  "@categoryMatchFeature3": {
+    "description": "Category Match feature 3"
+  },
+  "categoryMatchFeature4": "Direct link to your store or website",
+  "@categoryMatchFeature4": {
+    "description": "Category Match feature 4"
+  },
+  "categoryMatchFeature5": "Weekly performance analytics",
+  "@categoryMatchFeature5": {
+    "description": "Category Match feature 5"
+  },
+  "categoryMatchFeature6": "Priority customer support",
+  "@categoryMatchFeature6": {
+    "description": "Category Match feature 6"
+  },
+
+  "topStoreBoostFeature1": "Priority placement in search results",
+  "@topStoreBoostFeature1": {
+    "description": "Top Store Boost feature 1"
+  },
+  "topStoreBoostFeature2": "Featured in \"Promoted Stores\" section",
+  "@topStoreBoostFeature2": {
+    "description": "Top Store Boost feature 2"
+  },
+  "topStoreBoostFeature3": "Highlighted store card with special badge",
+  "@topStoreBoostFeature3": {
+    "description": "Top Store Boost feature 3"
+  },
+  "topStoreBoostFeature4": "Increased visibility across the app",
+  "@topStoreBoostFeature4": {
+    "description": "Top Store Boost feature 4"
+  },
+  "topStoreBoostFeature5": "Weekly performance analytics",
+  "@topStoreBoostFeature5": {
+    "description": "Top Store Boost feature 5"
+  },
+  "topStoreBoostFeature6": "Detailed customer engagement metrics",
+  "@topStoreBoostFeature6": {
+    "description": "Top Store Boost feature 6"
+  },
+
+  "subscribeNow": "Subscribe Now",
+  "existingAdvertisement": "Existing Advertisement",
+  "@existingAdvertisement": {
+    "description": "Existing advertisement dialog title"
+  },
+  "existingAdMessage": "You already have an active store boost advertisement for \"{storeName}\". You can extend the ad period in the My Ads section.",
+  "@existingAdMessage": {
+    "description": "Existing advertisement dialog message",
+    "placeholders": {
+      "storeName": {
+        "type": "String",
+        "example": "My Store"
+      }
+    }
+  },
+  "goToMyAds": "Go to My Ads",
+  "@goToMyAds": {
+    "description": "Go to My Ads button text"
+  },
+  "userNotAuthenticated": "User not authenticated",
+  "@userNotAuthenticated": {
+    "description": "User not authenticated error message"
+  },
+  "storePromotionInfo": "Your store will be promoted in search results and category listings. No image upload needed - we'll use your store logo.",
+  "@storePromotionInfo": {
+    "description": "Store promotion information text"
+  },
+  "category": "Category",
+  "@category": {
+    "description": "Category field label"
+  },
+  "subcategoriesMultiple": "Subcategories (Multiple Selection)",
+  "@subcategoriesMultiple": {
+    "description": "Subcategories multiple selection field label"
+  },
+  "pleaseSelectCategoryFirst": "Please select a category first",
+  "@pleaseSelectCategoryFirst": {
+    "description": "Please select category first message"
+  },
+  "noCategoriesAvailable": "No categories available. Please try again later.",
+  "@noCategoriesAvailable": {
+    "description": "No categories available message"
+  },
+  "selectCategory": "Select Category",
+  "@selectCategory": {
+    "description": "Select category dialog title"
+  },
+  "selectSubcategories": "Select Subcategories (Multiple)",
+  "@selectSubcategories": {
+    "description": "Select subcategories dialog title"
+  },
+  "noSubcategoriesAvailable": "No subcategories available for this category.",
+  "@noSubcategoriesAvailable": {
+    "description": "No subcategories available message"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  "selectStateProvince": "Select State/Province",
+  "@selectStateProvince": {
+    "description": "Select state/province dialog title"
+  },
+  "needHelp": "Need Help?",
+  "@needHelp": {
+    "description": "Need help text in error dialog"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email label"
+  },
+  "phone": "Phone",
+  "@phone": {
+    "description": "Phone label"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close button text"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button text"
+  },
+  "continue_": "Continue",
+  "@continue_": {
+    "description": "Continue button text"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm button text"
+  },
+  "success": "Success",
+  "@success": {
+    "description": "Success title"
+  },
+  "operationCompleted": "Operation completed successfully",
+  "@operationCompleted": {
+    "description": "Operation completed message"
+  },
+  "chatbotTitle": "AI Assistant",
+  "@chatbotTitle": {
+    "description": "Chatbot screen title"
+  },
+  "chatbotSubtitle": "Ask me anything about Matajir",
+  "@chatbotSubtitle": {
+    "description": "Chatbot screen subtitle"
+  },
+  "chatbotWelcome": "Hello! I'm your Matajir assistant. I'm here to help you with any questions about using the app, creating stores, managing advertisements, and more!",
+  "@chatbotWelcome": {
+    "description": "Chatbot welcome message"
+  },
+  "chatbotSuggestedQuestions": "Here are some questions you might want to ask:",
+  "@chatbotSuggestedQuestions": {
+    "description": "Chatbot suggested questions intro"
+  },
+  "chatbotQuestion1": "How do I create a store?",
+  "@chatbotQuestion1": {
+    "description": "Chatbot suggested question 1"
+  },
+  "chatbotQuestion2": "What types of advertisements can I create?",
+  "@chatbotQuestion2": {
+    "description": "Chatbot suggested question 2"
+  },
+  "chatbotQuestion3": "How do I promote my store?",
+  "@chatbotQuestion3": {
+    "description": "Chatbot suggested question 3"
+  },
+  "chatbotQuestion4": "How does the payment system work?",
+  "@chatbotQuestion4": {
+    "description": "Chatbot suggested question 4"
+  },
+  "chatbotError": "I'm sorry, I'm having trouble responding right now. Please try again or contact our support team for assistance.",
+  "@chatbotError": {
+    "description": "Chatbot error message"
+  },
+  "chatbotTyping": "AI is typing...",
+  "@chatbotTyping": {
+    "description": "Chatbot typing indicator"
+  },
+  "chatbotInputHint": "Type your message here...",
+  "@chatbotInputHint": {
+    "description": "Chatbot input field hint"
+  },
+  "support": "Support",
+  "@support": {
+    "description": "Support screen title"
+  },
+  "supportSubtitle": "We're here to help you",
+  "@supportSubtitle": {
+    "description": "Support screen subtitle"
+  },
+  "supportWelcome": "Welcome to Matajir Support!",
+  "@supportWelcome": {
+    "description": "Support welcome message"
+  },
+  "supportDescription": "Our team is ready to assist you with any questions or issues you may have.",
+  "@supportDescription": {
+    "description": "Support description"
+  },
+  "contactMethods": "Contact Methods",
+  "@contactMethods": {
+    "description": "Contact methods section title"
+  },
+  "emailSupport": "Email Support",
+  "@emailSupport": {
+    "description": "Email support title"
+  },
+  "emailSupportDesc": "Send us an email and we'll respond within 24 hours",
+  "@emailSupportDesc": {
+    "description": "Email support description"
+  },
+  "phoneSupport": "Phone Support",
+  "@phoneSupport": {
+    "description": "Phone support title"
+  },
+  "phoneSupportDesc": "Call us directly for immediate assistance",
+  "@phoneSupportDesc": {
+    "description": "Phone support description"
+  },
+  "whatsappSupport": "WhatsApp Support",
+  "@whatsappSupport": {
+    "description": "WhatsApp support title"
+  },
+  "whatsappSupportDesc": "Chat with us on WhatsApp for quick help",
+  "@whatsappSupportDesc": {
+    "description": "WhatsApp support description"
+  },
+  "followUs": "Follow Us",
+  "@followUs": {
+    "description": "Follow us on social media"
+  },
+  "faq": "Frequently Asked Questions",
+  "@faq": {
+    "description": "FAQ section title"
+  },
+  "faqDescription": "Find answers to common questions about using Matajir",
+  "@faqDescription": {
+    "description": "FAQ description"
+  },
+  "viewFaq": "View FAQ",
+  "@viewFaq": {
+    "description": "View FAQ button text"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile screen title"
+  },
+  "updateProfile": "Update Profile",
+  "@updateProfile": {
+    "description": "Update profile button text"
+  },
+  "profileUpdatedSuccessfully": "Profile updated successfully!",
+  "@profileUpdatedSuccessfully": {
+    "description": "Profile update success message"
+  },
+  "tapToChangePhoto": "Tap to change photo",
+  "@tapToChangePhoto": {
+    "description": "Instruction to change profile photo"
+  },
+  "storeOwner": "Store Owner",
+  "@storeOwner": {
+    "description": "Store owner label"
+  },
+  "storeOwnerDescription": "Enable this to create and manage stores",
+  "@storeOwnerDescription": {
+    "description": "Store owner toggle description"
+  },
+  "dangerZone": "Danger Zone",
+  "@dangerZone": {
+    "description": "Danger zone section title"
+  },
+  "dangerZoneDescription": "Actions in this section are irreversible. Please proceed with caution.",
+  "@dangerZoneDescription": {
+    "description": "Danger zone description"
+  },
+  "deleteAccount": "Delete Account",
+  "@deleteAccount": {
+    "description": "Delete account button text"
+  },
+  "deleteAccountConfirmation": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.",
+  "@deleteAccountConfirmation": {
+    "description": "Delete account confirmation message"
+  },
+  "featureNotAvailable": "Feature Not Available",
+  "@featureNotAvailable": {
+    "description": "Feature not available title"
+  },
+  "accountDeletionNotImplemented": "Account deletion is not yet implemented. Please contact support for assistance.",
+  "@accountDeletionNotImplemented": {
+    "description": "Account deletion not implemented message"
+  },
+  "pleaseEnterYourEmail": "Please enter your email",
+  "@pleaseEnterYourEmail": {
+    "description": "Email validation error message"
+  }
+}
