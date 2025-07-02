@@ -47,7 +47,15 @@ class _LoginScreenState extends State<LoginScreen> {
             backgroundColor: Colors.green,
           ),
         );
-        Navigator.of(context).pop(); // Return to previous screen
+
+        // Check user type and navigate accordingly
+        if (authController.isAdmin) {
+          // Admin users go directly to admin dashboard
+          Navigator.of(context).pushReplacementNamed('/admin');
+        } else {
+          // Regular users return to previous screen
+          Navigator.of(context).pop();
+        }
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -72,14 +80,22 @@ class _LoginScreenState extends State<LoginScreen> {
       final isProfileComplete = await authController.isUserProfileComplete();
 
       if (isProfileComplete) {
-        // User has a complete profile, navigate to home
+        // User has a complete profile, navigate based on user type
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(AppLocalizations.of(context).loginSuccess),
             backgroundColor: Colors.green,
           ),
         );
-        Navigator.of(context).pop(); // Return to previous screen
+
+        // Check user type and navigate accordingly
+        if (authController.isAdmin) {
+          // Admin users go directly to admin dashboard
+          Navigator.of(context).pushReplacementNamed('/admin');
+        } else {
+          // Regular users return to previous screen
+          Navigator.of(context).pop();
+        }
       } else {
         // User needs to complete their profile
         Navigator.of(context).pushReplacement(
@@ -150,14 +166,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     const SizedBox(height: 24),
 
-                    // Logo or app name
-                    Text(
-                      AppLocalizations.of(context).appName,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
+                    // Logo or app name (long press for admin setup)
+                    GestureDetector(
+                      onLongPress: () {
+                        Navigator.pushNamed(context, '/admin-setup');
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).appName,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
 

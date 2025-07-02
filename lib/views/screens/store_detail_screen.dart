@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../models/store.dart';
+import '../../models/store_review.dart';
+import '../../controllers/auth_controller.dart';
+import '../../controllers/store_controller.dart';
+import '../../services/review_service.dart';
+import '../widgets/rating_stars.dart';
+import '../widgets/review_dialog.dart';
+import '../../widgets/rtl_back_button.dart';
+import '../../providers/localization_provider.dart';
+import 'store_reviews_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StoreDetailScreen extends StatefulWidget {
   final Store store;
@@ -14,6 +26,51 @@ class StoreDetailScreen extends StatefulWidget {
 class _StoreDetailScreenState extends State<StoreDetailScreen> {
   int _currentImageIndex = 0;
   final PageController _pageController = PageController();
+  List<StoreReview> _reviews = [];
+  bool _isLoadingReviews = false;
+  StoreReview? _userReview;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadReviews();
+  }
+
+  Future<void> _loadReviews() async {
+    setState(() {
+      _isLoadingReviews = true;
+    });
+
+    try {
+      // Load reviews for this store
+      final reviews = await ReviewService.getStoreReviews(
+        storeId: widget.store.id,
+        limit: 10,
+      );
+
+      // Load user's review if logged in
+      StoreReview? userReview;
+      try {
+        userReview = await ReviewService.getUserReviewForStore(widget.store.id);
+      } catch (e) {
+        // User not logged in or no review found
+      }
+
+      if (mounted) {
+        setState(() {
+          _reviews = reviews;
+          _userReview = userReview;
+          _isLoadingReviews = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoadingReviews = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,40 +109,52 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                     return FlexibleSpaceBar(
                       background: Stack(
                         children: [
-                          // Back button that fades out when scrolling
-                          Positioned(
-                            top: MediaQuery.of(context).padding.top + 8,
-                            left: 16.0,
-                            child: Opacity(
-                              opacity: expandRatio,
-                              child: GestureDetector(
-                                onTap:
-                                    expandRatio > 0.5
-                                        ? () {
-                                          Navigator.pop(context);
-                                        }
-                                        : null,
-                                child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withAlpha(26),
-                                        blurRadius: 4,
-                                        offset: const Offset(0, 2),
+                          // RTL Back button that fades out when scrolling
+                          Consumer<LocalizationProvider>(
+                            builder: (context, localizationProvider, _) {
+                              final isRTL =
+                                  localizationProvider
+                                      .currentLocale
+                                      .languageCode ==
+                                  'ar';
+                              return Positioned(
+                                top: MediaQuery.of(context).padding.top + 8,
+                                left: isRTL ? null : 16.0,
+                                right: isRTL ? 16.0 : null,
+                                child: Opacity(
+                                  opacity: expandRatio,
+                                  child: GestureDetector(
+                                    onTap:
+                                        expandRatio > 0.5
+                                            ? () {
+                                              Navigator.pop(context);
+                                            }
+                                            : null,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withAlpha(26),
+                                            blurRadius: 4,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  child: const Icon(
-                                    Icons.arrow_back,
-                                    color: Color(0xFF673AB7),
-                                    size: 20,
+                                      child: Icon(
+                                        isRTL
+                                            ? Icons.arrow_forward
+                                            : Icons.arrow_back,
+                                        color: const Color(0xFF673AB7),
+                                        size: 20,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           ),
 
                           // Title in the center when collapsed
@@ -456,6 +525,230 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                               ),
                               const SizedBox(height: 12),
 
+                              // Rating and Favorite Row
+                              Row(
+                                children: [
+                                  // Rating display
+                                  if (widget.store.totalReviews > 0) ...[
+                                    RatingStars(
+                                      rating: widget.store.averageRating,
+                                      size: 18,
+                                      activeColor: Colors.amber,
+                                      inactiveColor: Colors.grey.shade300,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      '${widget.store.averageRating.toStringAsFixed(1)} (${widget.store.totalReviews})',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey[600],
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ] else ...[
+                                    Text(
+                                      AppLocalizations.of(context).noReviews,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey[600],
+                                      ),
+                                    ),
+                                  ],
+                                  const Spacer(),
+
+                                  // Favorite button
+                                  Consumer2<AuthController, StoreController>(
+                                    builder: (
+                                      context,
+                                      authController,
+                                      storeController,
+                                      _,
+                                    ) {
+                                      if (!authController.isLoggedIn) {
+                                        return const SizedBox.shrink();
+                                      }
+
+                                      final isFavorite = storeController
+                                          .favoriteStores
+                                          .any(
+                                            (favStore) =>
+                                                favStore.id == widget.store.id,
+                                          );
+
+                                      return GestureDetector(
+                                        onTap: () async {
+                                          try {
+                                            if (isFavorite) {
+                                              await storeController
+                                                  .removeFromFavorites(
+                                                    widget.store.id,
+                                                  );
+                                              if (mounted) {
+                                                ScaffoldMessenger.of(
+                                                  context,
+                                                ).showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      ).removeFromFavorites,
+                                                    ),
+                                                    backgroundColor:
+                                                        Colors.orange,
+                                                  ),
+                                                );
+                                              }
+                                            } else {
+                                              await storeController
+                                                  .addToFavorites(
+                                                    widget.store.id,
+                                                  );
+                                              if (mounted) {
+                                                ScaffoldMessenger.of(
+                                                  context,
+                                                ).showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      ).addToFavorites,
+                                                    ),
+                                                    backgroundColor:
+                                                        Colors.green,
+                                                  ),
+                                                );
+                                              }
+                                            }
+                                          } catch (e) {
+                                            if (mounted) {
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                SnackBar(
+                                                  content: Text('Error: $e'),
+                                                  backgroundColor: Colors.red,
+                                                ),
+                                              );
+                                            }
+                                          }
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.all(8),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                isFavorite
+                                                    ? Colors.red.withValues(
+                                                      alpha: 0.1,
+                                                    )
+                                                    : Colors.grey.withValues(
+                                                      alpha: 0.1,
+                                                    ),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            isFavorite
+                                                ? Icons.favorite
+                                                : Icons.favorite_border,
+                                            color:
+                                                isFavorite
+                                                    ? Colors.red
+                                                    : Colors.grey,
+                                            size: 24,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+
+                              // See Reviews Button
+                              if (widget.store.totalReviews > 0)
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: TextButton.icon(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) => StoreReviewsScreen(
+                                                store: widget.store,
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    icon: const Icon(
+                                      Icons.rate_review_outlined,
+                                    ),
+                                    label: Text(
+                                      'See Reviews (${widget.store.totalReviews})',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    style: TextButton.styleFrom(
+                                      foregroundColor: const Color(0xFF673AB7),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              const SizedBox(height: 16),
+
+                              // Write Review Button
+                              Consumer<AuthController>(
+                                builder: (context, authController, _) {
+                                  if (!authController.isLoggedIn) {
+                                    return const SizedBox.shrink();
+                                  }
+
+                                  return SizedBox(
+                                    width: double.infinity,
+                                    child: OutlinedButton.icon(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder:
+                                              (context) => ReviewDialog(
+                                                storeId: widget.store.id,
+                                                storeName: widget.store.name,
+                                                existingReview: _userReview,
+                                                onReviewSubmitted: () {
+                                                  // Refresh reviews and store data
+                                                  _loadReviews();
+                                                },
+                                              ),
+                                        );
+                                      },
+                                      icon: const Icon(Icons.rate_review),
+                                      label: Text(
+                                        _userReview != null
+                                            ? 'Update Review'
+                                            : AppLocalizations.of(
+                                              context,
+                                            ).writeReview,
+                                      ),
+                                      style: OutlinedButton.styleFrom(
+                                        foregroundColor: const Color(
+                                          0xFF673AB7,
+                                        ),
+                                        side: const BorderSide(
+                                          color: Color(0xFF673AB7),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              const SizedBox(height: 16),
+
                               // Location with map icon
                               Container(
                                 padding: const EdgeInsets.symmetric(
@@ -576,25 +869,11 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       if (widget.store.socialLinks!.containsKey(
-                                        'facebook',
-                                      ))
-                                        _buildSocialIcon(
-                                          Icons.facebook,
-                                          Colors.blue[800]!,
-                                          () {
-                                            _launchUrl(
-                                              widget
-                                                  .store
-                                                  .socialLinks!['facebook'],
-                                            );
-                                          },
-                                        ),
-                                      if (widget.store.socialLinks!.containsKey(
                                         'instagram',
                                       ))
                                         _buildSocialIcon(
-                                          Icons.camera_alt,
-                                          Colors.purple,
+                                          FontAwesomeIcons.instagram,
+                                          const Color(0xFFE4405F),
                                           () {
                                             _launchUrl(
                                               widget
@@ -604,16 +883,72 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                                           },
                                         ),
                                       if (widget.store.socialLinks!.containsKey(
+                                        'facebook',
+                                      ))
+                                        _buildSocialIcon(
+                                          FontAwesomeIcons.facebook,
+                                          const Color(0xFF1877F2),
+                                          () {
+                                            _launchUrl(
+                                              widget
+                                                  .store
+                                                  .socialLinks!['facebook'],
+                                            );
+                                          },
+                                        ),
+                                      if (widget.store.socialLinks!.containsKey(
+                                        'tiktok',
+                                      ))
+                                        _buildSocialIcon(
+                                          FontAwesomeIcons.tiktok,
+                                          const Color(0xFF000000),
+                                          () {
+                                            _launchUrl(
+                                              widget
+                                                  .store
+                                                  .socialLinks!['tiktok'],
+                                            );
+                                          },
+                                        ),
+                                      if (widget.store.socialLinks!.containsKey(
                                         'twitter',
                                       ))
                                         _buildSocialIcon(
-                                          Icons.flutter_dash,
-                                          Colors.blue,
+                                          FontAwesomeIcons.twitter,
+                                          const Color(0xFF1DA1F2),
                                           () {
                                             _launchUrl(
                                               widget
                                                   .store
                                                   .socialLinks!['twitter'],
+                                            );
+                                          },
+                                        ),
+                                      if (widget.store.socialLinks!.containsKey(
+                                        'youtube',
+                                      ))
+                                        _buildSocialIcon(
+                                          FontAwesomeIcons.youtube,
+                                          const Color(0xFFFF0000),
+                                          () {
+                                            _launchUrl(
+                                              widget
+                                                  .store
+                                                  .socialLinks!['youtube'],
+                                            );
+                                          },
+                                        ),
+                                      if (widget.store.socialLinks!.containsKey(
+                                        'snapchat',
+                                      ))
+                                        _buildSocialIcon(
+                                          FontAwesomeIcons.snapchat,
+                                          const Color(0xFFFFFC00),
+                                          () {
+                                            _launchUrl(
+                                              widget
+                                                  .store
+                                                  .socialLinks!['snapchat'],
                                             );
                                           },
                                         ),
@@ -672,56 +1007,6 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                                     ),
                                   ),
                                 ),
-
-                                // Contact button
-                                const SizedBox(height: 12),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      // Show contact options
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                            'Contact feature coming soon',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    style: OutlinedButton.styleFrom(
-                                      foregroundColor: const Color(0xFF673AB7),
-                                      side: const BorderSide(
-                                        color: Color(0xFF673AB7),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 16,
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                    ),
-                                    child: const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.contact_support_outlined,
-                                          size: 20,
-                                        ),
-                                        SizedBox(width: 10),
-                                        Text(
-                                          'Contact Store',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
                               ],
                             ],
                           ),
@@ -757,7 +1042,7 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
               ),
             ],
           ),
-          child: Icon(icon, color: color, size: 28),
+          child: FaIcon(icon, color: color, size: 24),
         ),
       ),
     );

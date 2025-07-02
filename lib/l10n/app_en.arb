@@ -1802,5 +1802,161 @@
   "pleaseEnterYourEmail": "Please enter your email",
   "@pleaseEnterYourEmail": {
     "description": "Email validation error message"
+  },
+  "spanish": "Spanish",
+  "@spanish": {
+    "description": "Spanish language name"
+  },
+  "german": "German",
+  "@german": {
+    "description": "German language name"
+  },
+  "italian": "Italian",
+  "@italian": {
+    "description": "Italian language name"
+  },
+  "spain": "Spain",
+  "@spain": {
+    "description": "Spain country name"
+  },
+  "germany": "Germany",
+  "@germany": {
+    "description": "Germany country name"
+  },
+  "italy": "Italy",
+  "@italy": {
+    "description": "Italy country name"
+  },
+  "addToFavorites": "Add to Favorites",
+  "@addToFavorites": {
+    "description": "Add to favorites button text"
+  },
+  "removeFromFavorites": "Remove from Favorites",
+  "@removeFromFavorites": {
+    "description": "Remove from favorites button text"
+  },
+  "noFavorites": "You have no favorite stores",
+  "@noFavorites": {
+    "description": "Empty favorites message"
+  },
+  "noFavoritesDescription": "Stores you mark as favorites will appear here",
+  "@noFavoritesDescription": {
+    "description": "Empty favorites description"
+  },
+  "rating": "Rating",
+  "@rating": {
+    "description": "Rating label"
+  },
+  "reviews": "Reviews",
+  "@reviews": {
+    "description": "Reviews label"
+  },
+  "writeReview": "Write Review",
+  "@writeReview": {
+    "description": "Write review button text"
+  },
+  "submitReview": "Submit Review",
+  "@submitReview": {
+    "description": "Submit review button text"
+  },
+  "reviewSubmitted": "Review submitted successfully",
+  "@reviewSubmitted": {
+    "description": "Review submitted success message"
+  },
+  "rateStore": "Rate Store",
+  "@rateStore": {
+    "description": "Rate store title"
+  },
+  "yourRating": "Your Rating",
+  "@yourRating": {
+    "description": "Your rating label"
+  },
+  "reviewText": "Review Text",
+  "@reviewText": {
+    "description": "Review text label"
+  },
+  "reviewTextHint": "Share your experience with this store...",
+  "@reviewTextHint": {
+    "description": "Review text hint"
+  },
+  "noReviews": "No reviews yet",
+  "@noReviews": {
+    "description": "No reviews message"
+  },
+  "noReviewsDescription": "Be the first to write a review for this store",
+  "@noReviewsDescription": {
+    "description": "No reviews description"
+  },
+  "stars": "stars",
+  "@stars": {
+    "description": "Stars plural"
+  },
+  "star": "star",
+  "@star": {
+    "description": "Star singular"
+  },
+  "viewAllReviews": "View All Reviews",
+  "@viewAllReviews": {
+    "description": "View all reviews button text"
+  },
+  "storeReviews": "Store Reviews",
+  "@storeReviews": {
+    "description": "Store reviews title"
+  },
+  "loginToReview": "Login to write a review",
+  "@loginToReview": {
+    "description": "Login to review message"
+  },
+  "loginToFavorite": "Login to add to favorites",
+  "@loginToFavorite": {
+    "description": "Login to favorite message"
+  },
+  "advertiseYourBusiness": "Advertise Your Business",
+  "@advertiseYourBusiness": {
+    "description": "Advertise business static ad title"
+  },
+  "createYourStore": "Create Your Store Today",
+  "@createYourStore": {
+    "description": "Create store static ad title"
+  },
+  "boostYourStore": "Boost Your Store",
+  "@boostYourStore": {
+    "description": "Boost store static ad title"
+  },
+  "premiumFeatures": "Premium Features",
+  "@premiumFeatures": {
+    "description": "Premium features static ad title"
+  },
+  "startAdvertising": "Start Advertising",
+  "@startAdvertising": {
+    "description": "Start advertising button text"
+  },
+  "learnMore": "Learn More",
+  "@learnMore": {
+    "description": "Learn more button text"
+  },
+  "algeria": "Algeria",
+  "@algeria": {
+    "description": "Algeria country name"
+  },
+  "morocco": "Morocco",
+  "@morocco": {
+    "description": "Morocco country name"
+  },
+  "egypt": "Egypt",
+  "@egypt": {
+    "description": "Egypt country name"
+  },
+  "detectingLocation": "Detecting your location...",
+  "@detectingLocation": {
+    "description": "Location detection message"
+  },
+  "locationPermissionDenied": "Location permission denied",
+  "@locationPermissionDenied": {
+    "description": "Location permission denied message"
+  },
+  "locationDisabled": "Location services are disabled",
+  "@locationDisabled": {
+    "description": "Location services disabled message"
   }
 }

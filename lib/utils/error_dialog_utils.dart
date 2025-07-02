@@ -16,8 +16,14 @@ class ErrorDialogUtils {
     VoidCallback? onRetry,
     String? retryButtonText,
   }) async {
+    // Check if context is still mounted
+    if (!context.mounted) {
+      debugPrint('Cannot show error dialog: context is not mounted');
+      return;
+    }
+
     final localizations = AppLocalizations.of(context);
-    
+
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -34,10 +40,7 @@ class ErrorDialogUtils {
               gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.white,
-                  Color(0xFFF8F9FA),
-                ],
+                colors: [Colors.white, Color(0xFFF8F9FA)],
               ),
             ),
             child: Column(
@@ -58,7 +61,7 @@ class ErrorDialogUtils {
                   ),
                 ),
                 const SizedBox(height: 20),
-                
+
                 // Title
                 Text(
                   title,
@@ -70,7 +73,7 @@ class ErrorDialogUtils {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
-                
+
                 // Message
                 Text(
                   message,
@@ -82,7 +85,7 @@ class ErrorDialogUtils {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
-                
+
                 // Support Options
                 if (showSupportOptions) ...[
                   Container(
@@ -127,7 +130,7 @@ class ErrorDialogUtils {
                   ),
                   const SizedBox(height: 20),
                 ],
-                
+
                 // Action Buttons
                 Row(
                   children: [
@@ -146,7 +149,7 @@ class ErrorDialogUtils {
                         child: Text(localizations.close),
                       ),
                     ),
-                    
+
                     // Retry Button (if provided)
                     if (onRetry != null) ...[
                       const SizedBox(width: 12),
@@ -186,8 +189,14 @@ class ErrorDialogUtils {
     VoidCallback? onContinue,
     String? continueButtonText,
   }) async {
+    // Check if context is still mounted
+    if (!context.mounted) {
+      debugPrint('Cannot show success dialog: context is not mounted');
+      return;
+    }
+
     final localizations = AppLocalizations.of(context);
-    
+
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -204,10 +213,7 @@ class ErrorDialogUtils {
               gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.white,
-                  Color(0xFFF8F9FA),
-                ],
+                colors: [Colors.white, Color(0xFFF8F9FA)],
               ),
             ),
             child: Column(
@@ -228,7 +234,7 @@ class ErrorDialogUtils {
                   ),
                 ),
                 const SizedBox(height: 20),
-                
+
                 // Title
                 Text(
                   title,
@@ -240,7 +246,7 @@ class ErrorDialogUtils {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
-                
+
                 // Message
                 Text(
                   message,
@@ -252,7 +258,7 @@ class ErrorDialogUtils {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
-                
+
                 // Continue Button
                 SizedBox(
                   width: double.infinity,
@@ -299,11 +305,7 @@ class ErrorDialogUtils {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon,
-              color: AppColors.primaryColor,
-              size: 20,
-            ),
+            Icon(icon, color: AppColors.primaryColor, size: 20),
             const SizedBox(height: 4),
             Text(
               label,
@@ -326,7 +328,7 @@ class ErrorDialogUtils {
       path: supportEmail,
       query: 'subject=Support Request - Matajir App',
     );
-    
+
     try {
       if (await canLaunchUrl(emailUri)) {
         await launchUrl(emailUri);
@@ -340,7 +342,7 @@ class ErrorDialogUtils {
   /// Launch phone dialer
   static Future<void> _launchPhone() async {
     final Uri phoneUri = Uri(scheme: 'tel', path: supportPhone);
-    
+
     try {
       if (await canLaunchUrl(phoneUri)) {
         await launchUrl(phoneUri);
@@ -360,8 +362,14 @@ class ErrorDialogUtils {
     String? cancelButtonText,
     Color? confirmButtonColor,
   }) async {
+    // Check if context is still mounted
+    if (!context.mounted) {
+      debugPrint('Cannot show confirmation dialog: context is not mounted');
+      return false;
+    }
+
     final localizations = AppLocalizations.of(context);
-    
+
     final result = await showDialog<bool>(
       context: context,
       barrierDismissible: false,
@@ -378,10 +386,7 @@ class ErrorDialogUtils {
               gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.white,
-                  Color(0xFFF8F9FA),
-                ],
+                colors: [Colors.white, Color(0xFFF8F9FA)],
               ),
             ),
             child: Column(
@@ -402,7 +407,7 @@ class ErrorDialogUtils {
                   ),
                 ),
                 const SizedBox(height: 20),
-                
+
                 // Title
                 Text(
                   title,
@@ -414,7 +419,7 @@ class ErrorDialogUtils {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
-                
+
                 // Message
                 Text(
                   message,
@@ -426,7 +431,7 @@ class ErrorDialogUtils {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
-                
+
                 // Action Buttons
                 Row(
                   children: [
@@ -446,7 +451,7 @@ class ErrorDialogUtils {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    
+
                     // Confirm Button
                     Expanded(
                       child: ElevatedButton(
@@ -470,7 +475,7 @@ class ErrorDialogUtils {
         );
       },
     );
-    
+
     return result ?? false;
   }
 }

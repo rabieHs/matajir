@@ -12,6 +12,7 @@ class AuthController extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   bool get isLoggedIn => _currentUser != null;
   bool get isStoreOwner => _currentUser?.isStoreOwner ?? false;
+  bool get isAdmin => _currentUser?.isAdmin ?? false;
 
   AuthController() {
     _initializeUser();
@@ -142,6 +143,26 @@ class AuthController extends ChangeNotifier {
     } catch (e) {
       _setError(e.toString());
       return false;
+    }
+  }
+
+  // Refresh current user profile data from database
+  Future<void> refreshUserProfile() async {
+    if (_currentUser == null) return;
+
+    try {
+      _setLoading(true);
+      final refreshedUser = await SupabaseService.instance.getUserProfile(
+        _currentUser!.id,
+      );
+      if (refreshedUser != null) {
+        _currentUser = refreshedUser;
+        notifyListeners();
+      }
+    } catch (e) {
+      _setError(e.toString());
+    } finally {
+      _setLoading(false);
     }
   }
 

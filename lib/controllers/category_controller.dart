@@ -4,6 +4,7 @@ import '../models/store.dart';
 import '../models/advertisement.dart';
 import '../utils/mock_data.dart';
 import '../services/supabase_service.dart';
+import '../services/static_ad_service.dart';
 import '../providers/localization_provider.dart';
 
 class CategoryController extends ChangeNotifier {
@@ -77,11 +78,33 @@ class CategoryController extends ChangeNotifier {
         _stores = storesData.map((data) => Store.fromJson(data)).toList();
 
         // Load category_match advertisements for subcategory
-        _advertisements = await SupabaseService.instance.getCategoryMatchAds(
-          country: _countryCode,
-          categoryId: _selectedCategory!.id,
-          subcategoryId: _selectedSubCategory!.id,
-        );
+        try {
+          _advertisements = await SupabaseService.instance.getCategoryMatchAds(
+            country: _countryCode,
+            categoryId: _selectedCategory!.id,
+            subcategoryId: _selectedSubCategory!.id,
+          );
+
+          // If no paid ads, use static ads
+          if (_advertisements.isEmpty) {
+            _advertisements = StaticAdService.getStaticAds(
+              adType: 'category_match',
+              country: _countryCode,
+              categoryId: _selectedCategory!.id,
+              subcategoryId: _selectedSubCategory!.id,
+              limit: 3,
+            );
+          }
+        } catch (e) {
+          debugPrint('Error loading paid ads, using static ads: $e');
+          _advertisements = StaticAdService.getStaticAds(
+            adType: 'category_match',
+            country: _countryCode,
+            categoryId: _selectedCategory!.id,
+            subcategoryId: _selectedSubCategory!.id,
+            limit: 3,
+          );
+        }
 
         // Load promoted stores from store_boost ads
         final promotedStoresData = await SupabaseService.instance
@@ -106,11 +129,33 @@ class CategoryController extends ChangeNotifier {
         _stores = storesData.map((data) => Store.fromJson(data)).toList();
 
         // Load category_match advertisements for category
-        _advertisements = await SupabaseService.instance.getCategoryMatchAds(
-          country: _countryCode,
-          categoryId: _selectedCategory!.id,
-          subcategoryId: _selectedSubCategory?.id,
-        );
+        try {
+          _advertisements = await SupabaseService.instance.getCategoryMatchAds(
+            country: _countryCode,
+            categoryId: _selectedCategory!.id,
+            subcategoryId: _selectedSubCategory?.id,
+          );
+
+          // If no paid ads, use static ads
+          if (_advertisements.isEmpty) {
+            _advertisements = StaticAdService.getStaticAds(
+              adType: 'category_match',
+              country: _countryCode,
+              categoryId: _selectedCategory!.id,
+              subcategoryId: _selectedSubCategory?.id,
+              limit: 3,
+            );
+          }
+        } catch (e) {
+          debugPrint('Error loading paid ads, using static ads: $e');
+          _advertisements = StaticAdService.getStaticAds(
+            adType: 'category_match',
+            country: _countryCode,
+            categoryId: _selectedCategory!.id,
+            subcategoryId: _selectedSubCategory?.id,
+            limit: 3,
+          );
+        }
 
         // Load promoted stores from store_boost ads
         final promotedStoresData = await SupabaseService.instance

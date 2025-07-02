@@ -9,6 +9,11 @@ class User {
   final List<String>? favoriteStoreIds;
   final bool isStoreOwner;
   final bool isVerified;
+  final bool isAdmin;
+  final bool isBlocked;
+  final DateTime? blockedAt;
+  final String? blockedReason;
+  final String? blockedBy;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -23,6 +28,11 @@ class User {
     this.favoriteStoreIds,
     this.isStoreOwner = false,
     this.isVerified = false,
+    this.isAdmin = false,
+    this.isBlocked = false,
+    this.blockedAt,
+    this.blockedReason,
+    this.blockedBy,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -45,6 +55,14 @@ class User {
               : null,
       isStoreOwner: json['is_store_owner'] ?? false,
       isVerified: json['is_verified'] ?? false,
+      isAdmin: json['is_admin'] ?? false,
+      isBlocked: json['is_blocked'] ?? false,
+      blockedAt:
+          json['blocked_at'] != null
+              ? DateTime.parse(json['blocked_at'])
+              : null,
+      blockedReason: json['blocked_reason'],
+      blockedBy: json['blocked_by'],
       createdAt:
           json['created_at'] != null
               ? DateTime.parse(json['created_at'])
@@ -68,6 +86,11 @@ class User {
       'favorite_store_ids': favoriteStoreIds,
       'is_store_owner': isStoreOwner,
       'is_verified': isVerified,
+      'is_admin': isAdmin,
+      'is_blocked': isBlocked,
+      'blocked_at': blockedAt?.toIso8601String(),
+      'blocked_reason': blockedReason,
+      'blocked_by': blockedBy,
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
     };
@@ -84,6 +107,11 @@ class User {
     List<String>? favoriteStoreIds,
     bool? isStoreOwner,
     bool? isVerified,
+    bool? isAdmin,
+    bool? isBlocked,
+    DateTime? blockedAt,
+    String? blockedReason,
+    String? blockedBy,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -98,6 +126,11 @@ class User {
       favoriteStoreIds: favoriteStoreIds ?? this.favoriteStoreIds,
       isStoreOwner: isStoreOwner ?? this.isStoreOwner,
       isVerified: isVerified ?? this.isVerified,
+      isAdmin: isAdmin ?? this.isAdmin,
+      isBlocked: isBlocked ?? this.isBlocked,
+      blockedAt: blockedAt ?? this.blockedAt,
+      blockedReason: blockedReason ?? this.blockedReason,
+      blockedBy: blockedBy ?? this.blockedBy,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );

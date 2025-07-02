@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:email_validator/email_validator.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../../constants/app_colors.dart';
-import '../../widgets/google_sign_in_button.dart';
-import 'login_screen.dart';
-import '../dashboard/dashboard_screen.dart';
-import '../complete_profile_screen.dart';
+import '../../../utils/error_dialog_utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class AdminSetupScreen extends StatefulWidget {
+  const AdminSetupScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<AdminSetupScreen> createState() => _AdminSetupScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _AdminSetupScreenState extends State<AdminSetupScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -25,7 +21,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _phoneController = TextEditingController();
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
-  bool _isStoreOwner = false;
 
   @override
   void dispose() {
@@ -37,110 +32,67 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
-  Future<void> _register() async {
+  Future<void> _createAdmin() async {
     if (_formKey.currentState!.validate()) {
       final authController = Provider.of<AuthController>(
         context,
         listen: false,
       );
+      
+      // First create the user account
       final success = await authController.signUp(
         email: _emailController.text.trim(),
         password: _passwordController.text,
         name: _nameController.text.trim(),
         phoneNumber: _phoneController.text.trim(),
-        isStoreOwner: _isStoreOwner,
+        isStoreOwner: false, // Admin is not a store owner
       );
 
       if (success && mounted) {
+        // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context).registerSuccess),
+          const SnackBar(
+            content: Text('Admin account created successfully! Please contact support to activate admin privileges.'),
             backgroundColor: Colors.green,
+            duration: Duration(seconds: 5),
           ),
         );
 
-        // Navigate based on user selection
-        if (_isStoreOwner) {
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const DashboardScreen()),
-            (route) => false,
-          );
-        } else {
-          // For regular user, just go back to the main app flow
-          Navigator.of(context).popUntil((route) => route.isFirst);
-        }
+        // Navigate back to login
+        Navigator.of(context).pop();
       } else if (mounted) {
         // Show error message with better handling
-        String errorMessage =
-            authController.errorMessage ??
-            AppLocalizations.of(context).errorOccurred;
-
+        String errorMessage = authController.errorMessage ?? 'Failed to create admin account';
+        
         // Check for specific email validation errors
-        if (errorMessage.contains('email_address_invalid') ||
-            (errorMessage.contains('Email address') &&
-                errorMessage.contains('invalid'))) {
-          errorMessage =
-              'Please enter a valid email address with a real domain (e.g., gmail.com, yahoo.com, outlook.com)';
+        if (errorMessage.contains('email_address_invalid') || 
+            (errorMessage.contains('Email address') && errorMessage.contains('invalid'))) {
+          errorMessage = 'Please enter a valid email address with a real domain (e.g., gmail.com, yahoo.com, outlook.com)';
         }
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(errorMessage),
-            backgroundColor: Colors.red,
-            duration: const Duration(seconds: 5),
-          ),
+        
+        ErrorDialogUtils.showErrorDialog(
+          context: context,
+          title: 'Error',
+          message: errorMessage,
         );
       }
-    }
-  }
-
-  Future<void> _signInWithGoogle() async {
-    final authController = Provider.of<AuthController>(context, listen: false);
-
-    final success = await authController.signInWithGoogle();
-
-    if (success && mounted) {
-      // Check if user profile is complete
-      final isProfileComplete = await authController.isUserProfileComplete();
-
-      if (isProfileComplete) {
-        // User has a complete profile, navigate based on user type
-        if (authController.isStoreOwner) {
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const DashboardScreen()),
-            (route) => false,
-          );
-        } else {
-          // For regular user, just go back to the main app flow
-          Navigator.of(context).popUntil((route) => route.isFirst);
-        }
-      } else {
-        // User needs to complete their profile
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const CompleteProfileScreen(),
-          ),
-        );
-      }
-    } else if (mounted && authController.errorMessage != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(authController.errorMessage!),
-          backgroundColor: Colors.red,
-        ),
-      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFF673AB7), Color(0xFF311B92)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              AppColors.primaryColor,
+              AppColors.secondaryColor,
+            ],
           ),
         ),
         child: SafeArea(
@@ -180,33 +132,62 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
 
-                    // Logo or app name
-                    Text(
-                      AppLocalizations.of(context).appName,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.white,
+                    // Title
+                    const Text(
+                      'Admin Setup',
+                      style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    const SizedBox(height: 48),
-
-                    // Register title
-                    Text(
-                      AppLocalizations.of(context).register,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    const Text(
+                      'Create Admin Account',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white70,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+
+                    const SizedBox(height: 40),
+
+                    // Warning message
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.orange.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.orange.withOpacity(0.5)),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.warning_amber_outlined,
+                            color: Colors.orange,
+                            size: 24,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              'This will create a regular user account. Contact support to activate admin privileges.',
+                              style: TextStyle(
+                                color: Colors.orange.shade100,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
 
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 24),
 
                     // Name field
                     Container(
@@ -224,7 +205,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: TextFormField(
                         controller: _nameController,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context).fullName,
+                          labelText: localizations.fullName,
                           labelStyle: const TextStyle(color: Colors.black54),
                           prefixIcon: const Icon(
                             Icons.person_outline,
@@ -239,7 +220,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: const TextStyle(color: Colors.black87),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context).requiredField;
+                            return localizations.requiredField;
                           }
                           return null;
                         },
@@ -265,14 +246,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context).email,
+                          labelText: localizations.email,
                           labelStyle: const TextStyle(color: Colors.black54),
-                          helperText:
-                              'Use a real email domain (gmail.com, yahoo.com, etc.)',
-                          helperStyle: const TextStyle(
-                            color: Colors.black45,
-                            fontSize: 12,
-                          ),
+                          helperText: 'Use a real email domain (gmail.com, yahoo.com, etc.)',
+                          helperStyle: const TextStyle(color: Colors.black45, fontSize: 12),
                           prefixIcon: const Icon(
                             Icons.email_outlined,
                             color: AppColors.primaryColor,
@@ -286,10 +263,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: const TextStyle(color: Colors.black87),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context).requiredField;
+                            return localizations.requiredField;
                           }
-                          if (!EmailValidator.validate(value)) {
-                            return AppLocalizations.of(context).invalidEmail;
+                          // Simple email validation
+                          if (!value.contains('@') || !value.contains('.')) {
+                            return localizations.invalidEmail;
                           }
                           return null;
                         },
@@ -315,7 +293,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         controller: _phoneController,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context).phoneNumber,
+                          labelText: localizations.phoneNumber,
                           labelStyle: const TextStyle(color: Colors.black54),
                           prefixIcon: const Icon(
                             Icons.phone_outlined,
@@ -351,7 +329,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         controller: _passwordController,
                         obscureText: _obscurePassword,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context).password,
+                          labelText: localizations.password,
                           labelStyle: const TextStyle(color: Colors.black54),
                           prefixIcon: const Icon(
                             Icons.lock_outline,
@@ -362,7 +340,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               _obscurePassword
                                   ? Icons.visibility_off
                                   : Icons.visibility,
-                              color: Colors.black54,
+                              color: Colors.grey,
                             ),
                             onPressed: () {
                               setState(() {
@@ -379,12 +357,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: const TextStyle(color: Colors.black87),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context).requiredField;
+                            return localizations.requiredField;
                           }
                           if (value.length < 6) {
-                            return AppLocalizations.of(
-                              context,
-                            ).passwordTooShort;
+                            return localizations.passwordTooShort;
                           }
                           return null;
                         },
@@ -410,8 +386,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         controller: _confirmPasswordController,
                         obscureText: _obscureConfirmPassword,
                         decoration: InputDecoration(
-                          labelText:
-                              AppLocalizations.of(context).confirmPassword,
+                          labelText: localizations.confirmPassword,
                           labelStyle: const TextStyle(color: Colors.black54),
                           prefixIcon: const Icon(
                             Icons.lock_outline,
@@ -422,12 +397,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               _obscureConfirmPassword
                                   ? Icons.visibility_off
                                   : Icons.visibility,
-                              color: Colors.black54,
+                              color: Colors.grey,
                             ),
                             onPressed: () {
                               setState(() {
-                                _obscureConfirmPassword =
-                                    !_obscureConfirmPassword;
+                                _obscureConfirmPassword = !_obscureConfirmPassword;
                               });
                             },
                           ),
@@ -440,136 +414,93 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: const TextStyle(color: Colors.black87),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context).requiredField;
+                            return localizations.requiredField;
                           }
                           if (value != _passwordController.text) {
-                            return AppLocalizations.of(
-                              context,
-                            ).passwordsDontMatch;
+                            return localizations.passwordsDontMatch;
                           }
                           return null;
                         },
                       ),
                     ),
 
-                    const SizedBox(height: 24),
-
-                    // Store owner switch
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withAlpha(26),
-                            blurRadius: 6,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Store Owner',
-                              style: const TextStyle(color: Colors.black87),
-                            ),
-                          ),
-                          Switch(
-                            value: _isStoreOwner,
-                            onChanged: (value) {
-                              setState(() {
-                                _isStoreOwner = value;
-                              });
-                            },
-                            activeColor: AppColors.primaryColor,
-                          ),
-                        ],
-                      ),
-                    ),
-
                     const SizedBox(height: 32),
 
-                    // Register button
-                    ElevatedButton(
-                      onPressed: _register,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: AppColors.primaryColor,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        elevation: 2,
-                      ),
-                      child: Text(
-                        AppLocalizations.of(context).register,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    // Or divider
-                    Row(
-                      children: [
-                        const Expanded(child: Divider(color: Colors.white38)),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            'OR',
-                            style: const TextStyle(color: Colors.white70),
+                    // Create Admin button
+                    Consumer<AuthController>(
+                      builder: (context, authController, child) {
+                        return SizedBox(
+                          height: 56,
+                          child: ElevatedButton(
+                            onPressed: authController.isLoading ? null : _createAdmin,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              foregroundColor: AppColors.primaryColor,
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: authController.isLoading
+                                ? const SizedBox(
+                                    width: 24,
+                                    height: 24,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        AppColors.primaryColor,
+                                      ),
+                                      strokeWidth: 2.5,
+                                    ),
+                                  )
+                                : const Text(
+                                    'Create Admin Account',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
                           ),
-                        ),
-                        const Expanded(child: Divider(color: Colors.white38)),
-                      ],
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    // Google Sign-In button
-                    GoogleSignInButton(
-                      text: 'Continue with Google',
-                      onPressed: _signInWithGoogle,
-                      isLoading: Provider.of<AuthController>(context).isLoading,
+                        );
+                      },
                     ),
 
                     const SizedBox(height: 24),
 
-                    // Login link
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context).alreadyHaveAccount,
-                          style: const TextStyle(color: Colors.white70),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            AppLocalizations.of(context).login,
-                            style: const TextStyle(
+                    // Instructions
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.white.withOpacity(0.3)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Next Steps:',
+                            style: TextStyle(
                               color: Colors.white,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 8),
+                          const Text(
+                            '1. After creating the account, contact support',
+                            style: TextStyle(color: Colors.white70, fontSize: 14),
+                          ),
+                          const Text(
+                            '2. Request admin privileges activation',
+                            style: TextStyle(color: Colors.white70, fontSize: 14),
+                          ),
+                          const Text(
+                            '3. Admin privileges will be manually activated',
+                            style: TextStyle(color: Colors.white70, fontSize: 14),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

@@ -25,6 +25,8 @@ class Store {
   final DateTime? publishedAt;
   final DateTime updatedAt;
   final String? description;
+  final double averageRating;
+  final int totalReviews;
 
   Store({
     required this.id,
@@ -53,6 +55,8 @@ class Store {
     this.publishedAt,
     required this.updatedAt,
     this.description,
+    this.averageRating = 0.0,
+    this.totalReviews = 0,
   });
 
   factory Store.fromJson(Map<String, dynamic> json) {
@@ -106,6 +110,8 @@ class Store {
               ? DateTime.parse(json['updated_at'])
               : DateTime.now(),
       description: json['description'],
+      averageRating: (json['average_rating'] as num?)?.toDouble() ?? 0.0,
+      totalReviews: json['total_reviews'] as int? ?? 0,
     );
   }
 
@@ -136,6 +142,8 @@ class Store {
       'published_at': publishedAt?.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
       'description': description,
+      'average_rating': averageRating,
+      'total_reviews': totalReviews,
     };
   }
 }

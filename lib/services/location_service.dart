@@ -58,7 +58,7 @@ class LocationService {
     return null;
   }
 
-  // Map any country code to our supported countries (TN, US, FR)
+  // Map any country code to our supported countries
   static String _mapCountryCodeToSupportedCountry(String? countryCode) {
     if (countryCode == null) return 'TN'; // Default to Tunisia
 
@@ -69,6 +69,54 @@ class LocationService {
         return 'US'; // United States
       case 'FR':
         return 'FR'; // France
+      case 'ES':
+        return 'ES'; // Spain
+      case 'DE':
+        return 'DE'; // Germany
+      case 'IT':
+        return 'IT'; // Italy
+      case 'DZ':
+        return 'DZ'; // Algeria
+      case 'MA':
+        return 'MA'; // Morocco
+      case 'EG':
+        return 'EG'; // Egypt
+      case 'SA':
+        return 'SA'; // Saudi Arabia
+      case 'AE':
+        return 'AE'; // United Arab Emirates
+      case 'QA':
+        return 'QA'; // Qatar
+      case 'KW':
+        return 'KW'; // Kuwait
+      case 'BH':
+        return 'BH'; // Bahrain
+      case 'OM':
+        return 'OM'; // Oman
+      case 'JO':
+        return 'JO'; // Jordan
+      case 'LB':
+        return 'LB'; // Lebanon
+      case 'GB':
+        return 'GB'; // United Kingdom
+      case 'CA':
+        return 'CA'; // Canada
+      case 'AU':
+        return 'AU'; // Australia
+      case 'JP':
+        return 'JP'; // Japan
+      case 'KR':
+        return 'KR'; // South Korea
+      case 'CN':
+        return 'CN'; // China
+      case 'IN':
+        return 'IN'; // India
+      case 'BR':
+        return 'BR'; // Brazil
+      case 'MX':
+        return 'MX'; // Mexico
+      case 'AR':
+        return 'AR'; // Argentina
       default:
         // For any other country, default to Tunisia
         return 'TN';

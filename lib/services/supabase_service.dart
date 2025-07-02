@@ -51,18 +51,20 @@ class SupabaseService {
         final userId = response.user!.id;
         final now = DateTime.now();
 
-        // Update user profile in the database
-        // The profile is created automatically by a trigger when the user is created
-        await _client
-            .from('profiles')
-            .update({
-              'name': name,
-              'phone_number': phoneNumber,
-              'is_store_owner': isStoreOwner,
-              'is_verified': false,
-              'updated_at': now.toIso8601String(),
-            })
-            .eq('id', userId);
+        // Create or update user profile in the database
+        // Use upsert to handle both new and existing profiles
+        await _client.from('profiles').upsert({
+          'id': userId,
+          'email': email,
+          'name': name,
+          'phone_number': phoneNumber,
+          'is_store_owner': isStoreOwner,
+          'is_verified': false,
+          'is_admin': false,
+          'is_blocked': false,
+          'created_at': now.toIso8601String(),
+          'updated_at': now.toIso8601String(),
+        });
 
         // Return the user object
         return app_models.User(
@@ -72,6 +74,8 @@ class SupabaseService {
           phoneNumber: phoneNumber,
           isStoreOwner: isStoreOwner,
           isVerified: false,
+          isAdmin: false,
+          isBlocked: false,
           createdAt: now,
           updatedAt: now,
         );
@@ -93,7 +97,17 @@ class SupabaseService {
       );
 
       if (response.user != null) {
-        return await getUserProfile(response.user!.id);
+        final user = await getUserProfile(response.user!.id);
+
+        // Check if user is blocked
+        if (user != null && user.isBlocked) {
+          await _client.auth.signOut();
+          throw Exception(
+            'Your account has been blocked. Reason: ${user.blockedReason ?? "Contact support for more information."}',
+          );
+        }
+
+        return user;
       }
     } catch (e) {
       rethrow;
@@ -1570,6 +1584,33 @@ class SupabaseService {
 
       // Return a generic placeholder image instead of throwing an error
       return 'https://placehold.co/300x300/4a90e2/ffffff?text=Store+Image';
+    }
+  }
+
+  // Upload category image
+  Future<String?> uploadCategoryImage(File imageFile) async {
+    try {
+      final uuid = const Uuid();
+      final fileName = '${uuid.v4()}.jpg';
+
+      debugPrint('Uploading category image: $fileName');
+
+      final response = await _client.storage
+          .from('category-images')
+          .upload(fileName, imageFile);
+
+      debugPrint('Category image upload response: $response');
+
+      // Get public URL
+      final publicUrl = _client.storage
+          .from('category-images')
+          .getPublicUrl(fileName);
+
+      debugPrint('Category image public URL: $publicUrl');
+      return publicUrl;
+    } catch (e) {
+      debugPrint('Error uploading category image: $e');
+      throw Exception('Failed to upload category image: $e');
     }
   }
 }

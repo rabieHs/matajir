@@ -17,6 +17,7 @@ class CustomDrawer extends StatelessWidget {
   final Function()? onAdvertiseTap;
   final Function()? onMyAdsTap;
   final Function()? onSettingsTap;
+  final Function()? onAdminTap;
   final Function()? onLogoutTap;
 
   const CustomDrawer({
@@ -32,6 +33,7 @@ class CustomDrawer extends StatelessWidget {
     this.onAdvertiseTap,
     this.onMyAdsTap,
     this.onSettingsTap,
+    this.onAdminTap,
     this.onLogoutTap,
   });
 
@@ -40,6 +42,7 @@ class CustomDrawer extends StatelessWidget {
     final authController = Provider.of<AuthController>(context);
     final isLoggedIn = authController.isLoggedIn;
     final isStoreOwner = authController.isStoreOwner;
+    final isAdmin = authController.currentUser?.isAdmin ?? false;
     final localizations = AppLocalizations.of(context);
 
     return Drawer(
@@ -165,14 +168,22 @@ class CustomDrawer extends StatelessWidget {
                   icon: Icons.dashboard_outlined,
                   title: localizations.dashboard,
                   onTap: onDashboardTap,
-                )
-              else
-                // For regular users
-                _buildDrawerItem(
-                  icon: Icons.favorite_border_outlined,
-                  title: localizations.favorites,
-                  onTap: onFavoritesTap,
                 ),
+
+              // Admin Dashboard (for admins only)
+              if (isAdmin)
+                _buildDrawerItem(
+                  icon: Icons.admin_panel_settings_outlined,
+                  title: 'Admin Dashboard',
+                  onTap: onAdminTap,
+                ),
+
+              // Favorites for all logged-in users (both store owners and regular users)
+              _buildDrawerItem(
+                icon: Icons.favorite_border_outlined,
+                title: localizations.favorites,
+                onTap: onFavoritesTap,
+              ),
             ],
 
             // Advertise with us (for all users)

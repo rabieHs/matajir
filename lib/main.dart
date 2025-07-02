@@ -12,6 +12,7 @@ import 'controllers/store_controller.dart';
 import 'controllers/auth_controller.dart';
 import 'controllers/advertisement_controller.dart';
 import 'controllers/payment_controller.dart';
+import 'controllers/admin_controller.dart';
 import 'providers/localization_provider.dart';
 import 'services/supabase_service.dart';
 import 'services/stripe_service.dart';
@@ -21,6 +22,8 @@ import 'views/screens/complete_profile_screen.dart';
 import 'views/screens/dashboard/dashboard_screen.dart';
 import 'views/screens/dashboard/my_ads_screen.dart';
 import 'views/screens/advertise/edit_ad/edit_ad_screen.dart';
+import 'views/screens/admin/admin_dashboard_screen.dart';
+import 'views/screens/admin/admin_setup_screen.dart';
 import 'models/advertisement.dart';
 import 'utils/storage_setup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -62,6 +65,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthController()),
         ChangeNotifierProvider(create: (_) => AdvertisementController()),
         ChangeNotifierProvider(create: (_) => PaymentController()),
+        ChangeNotifierProvider(create: (_) => AdminController()),
       ],
       child: Consumer<LocalizationProvider>(
         builder: (context, localizationProvider, child) {
@@ -109,6 +113,9 @@ class MyApp extends StatelessWidget {
               Locale('en'), // English
               Locale('fr'), // French
               Locale('ar'), // Arabic
+              Locale('es'), // Spanish
+              Locale('de'), // German
+              Locale('it'), // Italian
             ],
             localizationsDelegates: const [
               AppLocalizations.delegate,
@@ -123,6 +130,8 @@ class MyApp extends StatelessWidget {
               '/complete-profile': (context) => const CompleteProfileScreen(),
               '/dashboard': (context) => const DashboardScreen(),
               '/my-ads': (context) => const MyAdsScreen(),
+              '/admin': (context) => const AdminDashboardScreen(),
+              '/admin-setup': (context) => const AdminSetupScreen(),
             },
             onGenerateRoute: (settings) {
               if (settings.name == '/edit-ad') {

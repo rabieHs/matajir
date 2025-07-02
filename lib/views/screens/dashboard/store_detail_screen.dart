@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../../controllers/store_controller.dart';
 import '../../../models/store.dart';
@@ -725,25 +726,11 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       if (widget.store.socialLinks!.containsKey(
-                                        'facebook',
-                                      ))
-                                        _buildSocialIcon(
-                                          Icons.facebook,
-                                          Colors.blue[800]!,
-                                          () {
-                                            _launchUrl(
-                                              widget
-                                                  .store
-                                                  .socialLinks!['facebook'],
-                                            );
-                                          },
-                                        ),
-                                      if (widget.store.socialLinks!.containsKey(
                                         'instagram',
                                       ))
                                         _buildSocialIcon(
-                                          Icons.camera_alt,
-                                          Colors.purple,
+                                          FontAwesomeIcons.instagram,
+                                          const Color(0xFFE4405F),
                                           () {
                                             _launchUrl(
                                               widget
@@ -753,16 +740,72 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                                           },
                                         ),
                                       if (widget.store.socialLinks!.containsKey(
+                                        'facebook',
+                                      ))
+                                        _buildSocialIcon(
+                                          FontAwesomeIcons.facebook,
+                                          const Color(0xFF1877F2),
+                                          () {
+                                            _launchUrl(
+                                              widget
+                                                  .store
+                                                  .socialLinks!['facebook'],
+                                            );
+                                          },
+                                        ),
+                                      if (widget.store.socialLinks!.containsKey(
+                                        'tiktok',
+                                      ))
+                                        _buildSocialIcon(
+                                          FontAwesomeIcons.tiktok,
+                                          const Color(0xFF000000),
+                                          () {
+                                            _launchUrl(
+                                              widget
+                                                  .store
+                                                  .socialLinks!['tiktok'],
+                                            );
+                                          },
+                                        ),
+                                      if (widget.store.socialLinks!.containsKey(
                                         'twitter',
                                       ))
                                         _buildSocialIcon(
-                                          Icons.flutter_dash,
-                                          Colors.blue,
+                                          FontAwesomeIcons.twitter,
+                                          const Color(0xFF1DA1F2),
                                           () {
                                             _launchUrl(
                                               widget
                                                   .store
                                                   .socialLinks!['twitter'],
+                                            );
+                                          },
+                                        ),
+                                      if (widget.store.socialLinks!.containsKey(
+                                        'youtube',
+                                      ))
+                                        _buildSocialIcon(
+                                          FontAwesomeIcons.youtube,
+                                          const Color(0xFFFF0000),
+                                          () {
+                                            _launchUrl(
+                                              widget
+                                                  .store
+                                                  .socialLinks!['youtube'],
+                                            );
+                                          },
+                                        ),
+                                      if (widget.store.socialLinks!.containsKey(
+                                        'snapchat',
+                                      ))
+                                        _buildSocialIcon(
+                                          FontAwesomeIcons.snapchat,
+                                          const Color(0xFFFFFC00),
+                                          () {
+                                            _launchUrl(
+                                              widget
+                                                  .store
+                                                  .socialLinks!['snapchat'],
                                             );
                                           },
                                         ),
@@ -821,56 +864,6 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                                     ),
                                   ),
                                 ),
-
-                                // Contact button
-                                const SizedBox(height: 12),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      // Show contact options
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                            'Contact feature coming soon',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    style: OutlinedButton.styleFrom(
-                                      foregroundColor: const Color(0xFF673AB7),
-                                      side: const BorderSide(
-                                        color: Color(0xFF673AB7),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 16,
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                    ),
-                                    child: const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.contact_support_outlined,
-                                          size: 20,
-                                        ),
-                                        SizedBox(width: 10),
-                                        Text(
-                                          'Contact Store',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
                               ],
                             ],
                           ),
@@ -906,7 +899,7 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
               ),
             ],
           ),
-          child: Icon(icon, color: color, size: 28),
+          child: FaIcon(icon, color: color, size: 24),
         ),
       ),
     );

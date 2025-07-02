@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/category.dart';
 import '../models/advertisement.dart';
 import '../services/supabase_service.dart';
+import '../services/static_ad_service.dart';
 
 class HomeController extends ChangeNotifier {
   List<Category> _categories = [];
@@ -50,13 +51,41 @@ class HomeController extends ChangeNotifier {
       // Load home_spotlight advertisements from Supabase with country filtering
       debugPrint('HomeController: Fetching home_spotlight ads...');
       if (_selectedCountry.isNotEmpty) {
-        final ads = await SupabaseService.instance.getBaseScreenAds(
-          country: _selectedCountry,
-        );
-        _advertisements = ads;
-        debugPrint(
-          'HomeController: Loaded ${_advertisements.length} home_spotlight ads for country: $_selectedCountry',
-        );
+        try {
+          // First try to get paid ads from database
+          final paidAds = await SupabaseService.instance.getBaseScreenAds(
+            country: _selectedCountry,
+          );
+
+          if (paidAds.isNotEmpty) {
+            _advertisements = paidAds;
+            debugPrint(
+              'HomeController: Loaded ${_advertisements.length} paid home_spotlight ads for country: $_selectedCountry',
+            );
+          } else {
+            // If no paid ads, use static ads
+            final staticAds = StaticAdService.getStaticAds(
+              adType: 'home_spotlight',
+              country: _selectedCountry,
+              limit: 3,
+            );
+            _advertisements = staticAds;
+            debugPrint(
+              'HomeController: No paid ads found, loaded ${_advertisements.length} static ads for country: $_selectedCountry',
+            );
+          }
+        } catch (e) {
+          debugPrint(
+            'HomeController: Error loading paid ads, falling back to static ads: $e',
+          );
+          // Fallback to static ads if database fails
+          final staticAds = StaticAdService.getStaticAds(
+            adType: 'home_spotlight',
+            country: _selectedCountry,
+            limit: 3,
+          );
+          _advertisements = staticAds;
+        }
       } else {
         debugPrint('HomeController: No country selected, skipping ads loading');
         _advertisements = [];

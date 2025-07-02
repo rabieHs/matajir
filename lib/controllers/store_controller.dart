@@ -3,6 +3,7 @@ import 'dart:math';
 import '../models/store.dart';
 import '../models/advertisement.dart';
 import '../services/supabase_service.dart';
+import '../services/static_ad_service.dart';
 import '../providers/localization_provider.dart';
 import '../utils/country_state_data.dart';
 
@@ -206,11 +207,31 @@ class StoreController extends ChangeNotifier {
       }
 
       // Load category_match advertisements for banner
-      _advertisements = await SupabaseService.instance.getCategoryMatchAds(
-        country: _countryCode,
-        categoryId: subCategoryId, // This is actually the subcategory ID
-        subcategoryId: null, // We're already filtering by subcategory
-      );
+      try {
+        _advertisements = await SupabaseService.instance.getCategoryMatchAds(
+          country: _countryCode,
+          categoryId: subCategoryId, // This is actually the subcategory ID
+          subcategoryId: null, // We're already filtering by subcategory
+        );
+
+        // If no paid ads, use static ads
+        if (_advertisements.isEmpty) {
+          _advertisements = StaticAdService.getStaticAds(
+            adType: 'category_match',
+            country: _countryCode,
+            categoryId: subCategoryId,
+            limit: 3,
+          );
+        }
+      } catch (e) {
+        debugPrint('Error loading paid ads, using static ads: $e');
+        _advertisements = StaticAdService.getStaticAds(
+          adType: 'category_match',
+          country: _countryCode,
+          categoryId: subCategoryId,
+          limit: 3,
+        );
+      }
 
       // Load promoted stores from store_boost ads
       final promotedStoresData = await SupabaseService.instance
@@ -288,11 +309,31 @@ class StoreController extends ChangeNotifier {
       }
 
       // Load category_match advertisements for banner
-      _advertisements = await SupabaseService.instance.getCategoryMatchAds(
-        country: _countryCode,
-        categoryId: categoryId,
-        subcategoryId: null, // No subcategory selected
-      );
+      try {
+        _advertisements = await SupabaseService.instance.getCategoryMatchAds(
+          country: _countryCode,
+          categoryId: categoryId,
+          subcategoryId: null, // No subcategory selected
+        );
+
+        // If no paid ads, use static ads
+        if (_advertisements.isEmpty) {
+          _advertisements = StaticAdService.getStaticAds(
+            adType: 'category_match',
+            country: _countryCode,
+            categoryId: categoryId,
+            limit: 3,
+          );
+        }
+      } catch (e) {
+        debugPrint('Error loading paid ads, using static ads: $e');
+        _advertisements = StaticAdService.getStaticAds(
+          adType: 'category_match',
+          country: _countryCode,
+          categoryId: categoryId,
+          limit: 3,
+        );
+      }
 
       // Load promoted stores from store_boost ads
       final promotedStoresData = await SupabaseService.instance
@@ -424,26 +465,36 @@ class StoreController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Simulate network delay
-      await Future.delayed(const Duration(milliseconds: 800));
+      // Get favorite store IDs from database
+      final favoritesResponse = await SupabaseService.instance.client
+          .from('favorites')
+          .select('store_id')
+          .eq('user_id', userId);
 
-      // For now, we'll just use a sample of stores from Supabase
-      final storesData = await SupabaseService.instance.getStoresByCategory(
-        '1', // Use the first category as a sample
-        limit: 10,
-      );
+      final favoriteStoreIds =
+          (favoritesResponse as List)
+              .map((fav) => fav['store_id'] as String)
+              .toList();
 
-      final allStores = storesData.map((data) => Store.fromJson(data)).toList();
+      if (favoriteStoreIds.isEmpty) {
+        _favoriteStores = [];
+        return;
+      }
 
-      // Simulate some stores being favorites (first 3 stores)
-      _favoriteStores = allStores.take(3).toList();
+      // Get the actual store data
+      final storesResponse = await SupabaseService.instance.client
+          .from('stores')
+          .select()
+          .inFilter('id', favoriteStoreIds)
+          .eq('is_active', true);
 
-      // In the future, this would be implemented with Supabase:
-      // final favorites = await SupabaseService.instance.getFavoriteStores(userId);
-      // _favoriteStores = favorites;
+      _favoriteStores =
+          (storesResponse as List).map((data) => Store.fromJson(data)).toList();
+
+      debugPrint('Loaded ${_favoriteStores.length} favorite stores');
     } catch (e) {
-      // Handle error
       debugPrint('Error loading favorite stores: $e');
+      _favoriteStores = [];
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -470,6 +521,102 @@ class StoreController extends ChangeNotifier {
     //   userId: userId,
     //   storeId: store.id,
     // );
+  }
+
+  // Add a store to favorites
+  Future<void> addToFavorites(String storeId) async {
+    try {
+      final userId = SupabaseService.instance.client.auth.currentUser?.id;
+      if (userId == null) {
+        throw Exception('User not authenticated');
+      }
+
+      // Check if already in favorites locally
+      if (_favoriteStores.any((s) => s.id == storeId)) {
+        debugPrint('Store already in local favorites');
+        return; // Already in favorites
+      }
+
+      // Check if already exists in database
+      final existingFavorite =
+          await SupabaseService.instance.client
+              .from('favorites')
+              .select()
+              .eq('user_id', userId)
+              .eq('store_id', storeId)
+              .maybeSingle();
+
+      if (existingFavorite != null) {
+        debugPrint('Store already in database favorites');
+        // Add to local favorites if not already there
+        final store = _stores.firstWhere(
+          (s) => s.id == storeId,
+          orElse: () => throw Exception('Store not found'),
+        );
+        _favoriteStores.add(store);
+        notifyListeners();
+        return;
+      }
+
+      // Add to database
+      await SupabaseService.instance.client.from('favorites').insert({
+        'user_id': userId,
+        'store_id': storeId,
+      });
+
+      // Find the store and add to local favorites
+      final store = _stores.firstWhere(
+        (s) => s.id == storeId,
+        orElse: () => throw Exception('Store not found'),
+      );
+      _favoriteStores.add(store);
+      notifyListeners();
+      debugPrint('Successfully added store to favorites');
+    } catch (e) {
+      debugPrint('Error adding to favorites: $e');
+      // Don't rethrow for duplicate key errors, just log them
+      if (e.toString().contains(
+        'duplicate key value violates unique constraint',
+      )) {
+        debugPrint('Store was already in favorites, ignoring duplicate error');
+        // Try to add to local favorites if not already there
+        try {
+          final store = _stores.firstWhere((s) => s.id == storeId);
+          if (!_favoriteStores.any((s) => s.id == storeId)) {
+            _favoriteStores.add(store);
+            notifyListeners();
+          }
+        } catch (storeError) {
+          debugPrint('Could not find store locally: $storeError');
+        }
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  // Remove a store from favorites
+  Future<void> removeFromFavorites(String storeId) async {
+    try {
+      final userId = SupabaseService.instance.client.auth.currentUser?.id;
+      if (userId == null) {
+        throw Exception('User not authenticated');
+      }
+
+      // Remove from database
+      await SupabaseService.instance.client
+          .from('favorites')
+          .delete()
+          .eq('user_id', userId)
+          .eq('store_id', storeId);
+
+      // Remove from local favorites
+      _favoriteStores.removeWhere((s) => s.id == storeId);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Error removing from favorites: $e');
+      rethrow;
+    }
   }
 
   // Load promoted stores for home screen

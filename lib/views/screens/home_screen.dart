@@ -37,6 +37,30 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // Location detection is now handled automatically by LocalizationProvider
+
+    // Load favorites when user is logged in
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authController = Provider.of<AuthController>(
+        context,
+        listen: false,
+      );
+      final storeController = Provider.of<StoreController>(
+        context,
+        listen: false,
+      );
+
+      if (authController.isLoggedIn) {
+        // Check if user is admin and redirect to admin dashboard
+        if (authController.isAdmin) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.of(context).pushReplacementNamed('/admin');
+          });
+          return;
+        }
+
+        storeController.loadFavoriteStores(authController.currentUser!.id);
+      }
+    });
   }
 
   @override
@@ -117,6 +141,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialPageRoute(builder: (context) => const SettingsScreen()),
               );
             },
+            onAdminTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/admin');
+            },
             onLogoutTap:
                 authController.isLoggedIn
                     ? () {
@@ -147,6 +175,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     : RefreshIndicator(
                       onRefresh: () async {
                         homeController.refreshData();
+                        // Also refresh user profile to get latest admin status
+                        await authController.refreshUserProfile();
                       },
                       child: CustomScrollView(
                         physics: const AlwaysScrollableScrollPhysics(),

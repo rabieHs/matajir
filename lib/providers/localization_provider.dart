@@ -25,6 +25,12 @@ class LocalizationProvider extends ChangeNotifier {
         return 'Fr';
       case 'ar':
         return 'Ar';
+      case 'es':
+        return 'Es';
+      case 'de':
+        return 'De';
+      case 'it':
+        return 'It';
       default:
         return 'En';
     }
